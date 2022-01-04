@@ -14,7 +14,10 @@ import {
 import { useHistory } from 'react-router-dom'
 import useAuth from 'hooks/useAuth'
 import { useTranslation } from 'contexts/Localization'
+import { Tiers } from 'config/constants/trading-competition/prizes'
 import { FINISHED, OVER } from 'config/constants/trading-competition/phases'
+import { getRewardGroupPrize } from 'views/TradingCompetition/helpers'
+import { TempDisableText } from 'views/TradingCompetition/TempDisableText'
 import RegisterModal from '../RegisterModal'
 import ClaimModal from '../ClaimModal'
 import { Heading2Text } from '../CompetitionHeadingText'
@@ -81,8 +84,12 @@ const BattleCta: React.FC<CompetitionProps> = ({
   const { hasRegistered, hasUserClaimed } = userTradingInformation
   const registeredAndNotStarted = hasRegistered && !isCompetitionLive && !hasCompetitionEnded
 
+  const prize = getRewardGroupPrize(userTradingInformation.userRewardGroup, userTradingInformation.userPointReward)
+
   const isButtonDisabled = Boolean(
-    isLoading ||
+    !prize ||
+      prize.tier !== Tiers.TEAL ||
+      isLoading ||
       currentPhase.state === OVER ||
       registeredAndNotStarted ||
       finishedAndPrizesClaimed ||
@@ -176,11 +183,13 @@ const BattleCta: React.FC<CompetitionProps> = ({
     }
   }
 
+  const showDisabledText = prize && prize.tier !== Tiers.TEAL
+
   return (
     <StyledCard>
       <CardBody>
         <Flex flexDirection="column" justifyContent="center" alignItems="center">
-          <StyledHeadingText>{getHeadingText()}</StyledHeadingText>
+          {showDisabledText ? <TempDisableText /> : <StyledHeadingText>{getHeadingText()}</StyledHeadingText>}
           {/* Hide button if in the pre-claim, FINISHED phase */}
           {currentPhase.state !== FINISHED && (
             <Flex alignItems="flex-end">
