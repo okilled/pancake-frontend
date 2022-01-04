@@ -19,7 +19,7 @@ const InputRow = styled.div<{ selected: boolean }>`
   padding: ${({ selected }) => (selected ? '0.75rem 0.5rem 0.75rem 1rem' : '0.75rem 0.75rem 0.75rem 1rem')};
 `
 const CurrencySelectButton = styled(Button).attrs({ variant: 'text', scale: 'sm' })`
-  padding: 0 0.5rem;
+  padding: 0.75rem 1rem 0 1rem;
 `
 const LabelRow = styled.div`
   display: flex;
@@ -87,49 +87,54 @@ export default function CurrencyInputPanel({
   )
   return (
     <Box id={id}>
-      <Flex mb="6px" alignItems="center" justifyContent="space-between">
-        <CurrencySelectButton
-          className="open-currency-select-button"
-          selected={!!currency}
-          onClick={() => {
-            if (!disableCurrencySelect) {
-              onPresentCurrencyModal()
-            }
-          }}
-        >
-          <Flex alignItems="center" justifyContent="space-between">
-            {pair ? (
-              <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
-            ) : currency ? (
-              <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
-            ) : null}
-            {pair ? (
-              <Text id="pair" bold>
-                {pair?.token0.symbol}:{pair?.token1.symbol}
-              </Text>
-            ) : (
-              <Text id="pair" bold>
-                {(currency && currency.symbol && currency.symbol.length > 20
-                  ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
-                      currency.symbol.length - 5,
-                      currency.symbol.length,
-                    )}`
-                  : currency?.symbol) || t('Select a currency')}
-              </Text>
-            )}
-            {!disableCurrencySelect && <ChevronDownIcon />}
-          </Flex>
-        </CurrencySelectButton>
-        {account && (
-          <Text onClick={onMax} color="textSubtle" fontSize="14px" style={{ display: 'inline', cursor: 'pointer' }}>
-            {!hideBalance && !!currency
-              ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
-              : ' -'}
-          </Text>
-        )}
-      </Flex>
       <InputPanel>
         <Container>
+          <Flex mb="6px" alignItems="center" justifyContent="space-between">
+            <CurrencySelectButton
+              className="open-currency-select-button"
+              selected={!!currency}
+              onClick={() => {
+                if (!disableCurrencySelect) {
+                  onPresentCurrencyModal()
+                }
+              }}
+            >
+              <Flex alignItems="center" justifyContent="space-between">
+                {pair ? (
+                  <DoubleCurrencyLogo currency0={pair.token0} currency1={pair.token1} size={16} margin />
+                ) : currency ? (
+                  <CurrencyLogo currency={currency} size="24px" style={{ marginRight: '8px' }} />
+                ) : null}
+                {pair ? (
+                  <Text id="pair" bold>
+                    {pair?.token0.symbol}:{pair?.token1.symbol}
+                  </Text>
+                ) : (
+                  <Text id="pair" bold>
+                    {(currency && currency.symbol && currency.symbol.length > 20
+                      ? `${currency.symbol.slice(0, 4)}...${currency.symbol.slice(
+                          currency.symbol.length - 5,
+                          currency.symbol.length,
+                        )}`
+                      : currency?.symbol) || t('Select a currency')}
+                  </Text>
+                )}
+                {!disableCurrencySelect && <ChevronDownIcon />}
+              </Flex>
+            </CurrencySelectButton>
+            {account && (
+              <Text
+                onClick={onMax}
+                color="textSubtle"
+                fontSize="14px"
+                style={{ display: 'inline', cursor: 'pointer', padding: '0.75rem 1rem 0 1rem' }}
+              >
+                {!hideBalance && !!currency
+                  ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
+                  : ' -'}
+              </Text>
+            )}
+          </Flex>
           <LabelRow>
             <RowBetween>
               <NumericalInput

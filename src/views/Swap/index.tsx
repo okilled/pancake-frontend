@@ -413,7 +413,7 @@ export default function Swap({ history }: RouteComponentProps) {
                     />
 
                     <AutoColumn justify="space-between">
-                      <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
+                      <AutoRow justify={isExpertMode ? 'space-between' : 'end'} style={{ padding: '0 1rem' }}>
                         <SwitchIconButton
                           variant="light"
                           scale="sm"
@@ -601,11 +601,11 @@ export default function Swap({ history }: RouteComponentProps) {
               )}
             </StyledInputCurrencyWrapper>
           </StyledSwapContainer>
-          {isChartExpanded && (
+          {/* {isChartExpanded && (
             <Box display={['none', null, null, 'block']} width="100%" height="100%">
               <Footer variant="side" />
             </Box>
-          )}
+          )} */}
         </Flex>
       </Flex>
     </Page>

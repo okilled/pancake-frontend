@@ -25,8 +25,8 @@ interface Props {
 
 const CurrencyInputContainer = styled(Flex)`
   align-items: center;
-  padding: 24px;
-  width: 100%;
+  padding: 20px 0;
+  margin: 0 20px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
@@ -44,17 +44,17 @@ const CurrencyInputHeader: React.FC<Props> = ({ title, subtitle, setIsChartDispl
   return (
     <CurrencyInputContainer>
       <Flex width="100%" alignItems="flex-start" justifyContent="space-between">
-        {setIsChartDisplayed && (
+        {/* {setIsChartDisplayed && (
           <ColoredIconButton onClick={toggleChartDisplayed} variant="text" scale="sm">
             {isChartDisplayed ? <ChartDisableIcon color="textSubtle" /> : <ChartIcon width="24px" color="textSubtle" />}
           </ColoredIconButton>
-        )}
-        <Flex flexDirection="column" alignItems="center">
+        )} */}
+        <Flex flexDirection="column">
           <Heading as="h2" mb="8px">
             {title}
           </Heading>
           <Flex alignItems="center">
-            <Text color="textSubtle" fontSize="14px">
+            <Text color="#999" fontSize="14px">
               {subtitle}
             </Text>
           </Flex>

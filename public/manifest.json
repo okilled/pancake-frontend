@@ -1,11 +1,11 @@
 {
-  "short_name": "PancakeSwap",
-  "name": "PancakeSwap",
-  "description": "Farm CAKE with Pancake LP Tokens",
-  "homepage_url": "https://pancakeswap.finance",
+  "short_name": "NinanceSwap",
+  "name": "NinanceSwap",
+  "description": "NinanceSwap",
+  "homepage_url": "https://swap.ninance.io/",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#1FC7D4",
+  "theme_color": "#7645D9",
   "background_color": "#ffffff",
   "orientation": "portrait",
   "icons": [

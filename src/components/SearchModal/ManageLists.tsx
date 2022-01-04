@@ -280,13 +280,13 @@ function ManageLists({
           </Card>
         </AutoColumn>
       )}
-      <ListContainer>
+      {/* <ListContainer>
         <AutoColumn gap="md">
           {sortedLists.map((listUrl) => (
             <ListRow key={listUrl} listUrl={listUrl} />
           ))}
         </AutoColumn>
-      </ListContainer>
+      </ListContainer> */}
     </Wrapper>
   )
 }

@@ -1,5 +1,5 @@
 {
-  "name": "PancakeSwap Default List",
+  "name": "NinanceSwap Default List",
   "timestamp": "2021-05-06T00:00:00Z",
   "version": {
     "major": 3,
@@ -51,12 +51,12 @@
       "logoURI": "https://pancakeswap.finance/images/tokens/0x55d398326f99059ff775485246999027b3197955.png"
     },
     {
-      "name": "PancakeSwap Token",
-      "symbol": "CAKE",
+      "name": "Ninance Token",
+      "symbol": "ERA",
       "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
       "chainId": 56,
       "decimals": 18,
-      "logoURI": "https://pancakeswap.finance/images/tokens/0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82.png"
+      "logoURI": "https://www.ninance.io/static/era-logo.c6a5cb3c.svg"
     },
     {
       "name": "Venus",
