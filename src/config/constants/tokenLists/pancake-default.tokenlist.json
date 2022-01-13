@@ -45,16 +45,16 @@
     {
       "name": "Tether USD",
       "symbol": "USDT",
-      "address": "0x55d398326f99059fF775485246999027B3197955",
-      "chainId": 56,
+      "address": "0x5f457009B6246aeE338EE6659b309cD83FFA9133",
+      "chainId": 97,
       "decimals": 18,
       "logoURI": "https://pancakeswap.finance/images/tokens/0x55d398326f99059ff775485246999027b3197955.png"
     },
     {
       "name": "Ninance Token",
       "symbol": "ERA",
-      "address": "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
-      "chainId": 56,
+      "address": "0xAe45bc23AB591BA756f0b7CddC050E7Dcc2f4bD8",
+      "chainId": 97,
       "decimals": 18,
       "logoURI": "https://www.ninance.io/static/era-logo.c6a5cb3c.svg"
     },

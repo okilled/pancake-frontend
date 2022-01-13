@@ -79,7 +79,7 @@ const App: React.FC = () => {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <GlobalCheckClaimStatus excludeLocations={[]} />
+      {/* <GlobalCheckClaimStatus excludeLocations={[]} /> */}
       <Menu>
         <SuspenseWithChunkError fallback={<PageLoader />}>
           <Switch>

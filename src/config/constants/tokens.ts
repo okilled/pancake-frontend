@@ -1891,6 +1891,15 @@ export const mainnetTokens = {
 }
 
 export const testnetTokens = {
+  usdt: new Token(
+    TESTNET,
+    '0x5f457009B6246aeE338EE6659b309cD83FFA9133',
+    18,
+    'USDT',
+    'USDT',
+    'https://www.binance.com/',
+  ),
+  era: new Token(TESTNET, '0xAe45bc23AB591BA756f0b7CddC050E7Dcc2f4bD8', 18, 'ERA', 'ERA', 'https://www.binance.com/'),
   wbnb: new Token(
     TESTNET,
     '0x094616F0BdFB0b526bD735Bf66Eca0Ad254ca81F',
