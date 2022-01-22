@@ -85,7 +85,7 @@ function TransactionSubmittedContent({
               {t('View on BscScan')}
             </Link>
           )}
-          {currencyToAdd && library?.provider?.isMetaMask && (
+          {/* {currencyToAdd && library?.provider?.isMetaMask && (
             <Button
               variant="tertiary"
               mt="12px"
@@ -97,7 +97,7 @@ function TransactionSubmittedContent({
                 <MetamaskIcon width="16px" ml="6px" />
               </RowFixed>
             </Button>
-          )}
+          )} */}
           <Button onClick={onDismiss} mt="20px">
             {t('Close')}
           </Button>

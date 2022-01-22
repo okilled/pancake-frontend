@@ -104,10 +104,14 @@ export default function PoolFinder() {
             {currency0 ? (
               <Row>
                 <CurrencyLogo currency={currency0} />
-                <Text ml="8px">{currency0.symbol}</Text>
+                <Text ml="8px" color="#FFF">
+                  {currency0.symbol}
+                </Text>
               </Row>
             ) : (
-              <Text ml="8px">{t('Select a Token')}</Text>
+              <Text ml="8px" color="#FFF">
+                {t('Select a Token')}
+              </Text>
             )}
           </StyledButton>
 
@@ -125,10 +129,14 @@ export default function PoolFinder() {
             {currency1 ? (
               <Row>
                 <CurrencyLogo currency={currency1} />
-                <Text ml="8px">{currency1.symbol}</Text>
+                <Text ml="8px" color="#FFF">
+                  {currency1.symbol}
+                </Text>
               </Row>
             ) : (
-              <Text as={Row}>{t('Select a Token')}</Text>
+              <Text as={Row} color="#FFF">
+                {t('Select a Token')}
+              </Text>
             )}
           </StyledButton>
 
