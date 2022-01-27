@@ -7,7 +7,7 @@ import { useGasPrice } from 'state/user/hooks'
 import truncateHash from 'utils/truncateHash'
 import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../config/constants'
 import { useTransactionAdder } from '../state/transactions/hooks'
-import { calculateGasMargin, getRouterContract, isAddress } from '../utils'
+import { calculateGasMargin, getRouterContract, getSwapRouterAddress, isAddress } from '../utils'
 import isZero from '../utils/isZero'
 import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './ENS/useENS'
@@ -55,7 +55,9 @@ function useSwapCallArguments(
   return useMemo(() => {
     if (!trade || !recipient || !library || !account || !chainId || !deadline) return []
 
-    const contract: Contract | null = getRouterContract(chainId, library, account)
+    // TODO: trade address
+
+    const contract: Contract | null = getRouterContract(chainId, library, account, getSwapRouterAddress(trade))
     if (!contract) {
       return []
     }

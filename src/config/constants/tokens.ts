@@ -1902,7 +1902,8 @@ export const testnetTokens = {
   era: new Token(TESTNET, '0xAe45bc23AB591BA756f0b7CddC050E7Dcc2f4bD8', 18, 'ERA', 'ERA', 'https://www.binance.com/'),
   wbnb: new Token(
     TESTNET,
-    '0x094616F0BdFB0b526bD735Bf66Eca0Ad254ca81F',
+    // '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    '0x73fa7a8aa8ae374035757184258418d5c266a439',
     18,
     'WBNB',
     'Wrapped BNB',

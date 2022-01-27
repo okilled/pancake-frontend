@@ -1,7 +1,22 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { mainnetTokens, testnetTokens } from './tokens'
 
+// export const ROUTER_ADDRESS = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3'
+
+// 0xCb8ED14E89Ec72b10e548d096DEB7fE7eFe88D45  ninance 01
 export const ROUTER_ADDRESS = '0xCb8ED14E89Ec72b10e548d096DEB7fE7eFe88D45'
+
+export const PANCAKE_ROUTER_ADDRESS = '0x29f477CF36AB141066762C8d689C12e9e70D0a34'
+
+export const PANCAKE_FACTORY_ADDRESS = '0xAc78e3edfccA3b239BCEAb8F5805C0EC5E223585'
+export const PANCAKE_FACTORY_INIT_CODE = '0xea6e57cd3911a626a540e0ba7da597dbec28808581dc33346714eb2b87d15109'
+
+export const PANCAKE_SWAP_PAIR = [
+  {
+    tokens: ['0x73fa7a8aa8ae374035757184258418d5c266a439', '0x7d2e92c717939e3b4ac1cb385483b749fadbb531'],
+    pair: '0x9eE1EC57cAf97096455daab9Af3aa91784A49673',
+  },
+]
 
 // a list of tokens by chain
 type ChainTokenList = {

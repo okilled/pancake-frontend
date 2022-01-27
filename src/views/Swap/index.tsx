@@ -357,7 +357,7 @@ export default function Swap({ history }: RouteComponentProps) {
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
       <Flex width="100%" justifyContent="center" position="relative">
-        {!isMobile && (
+        {/* {!isMobile && (
           <PriceChartContainer
             inputCurrencyId={inputCurrencyId}
             inputCurrency={currencies[Field.INPUT]}
@@ -368,8 +368,8 @@ export default function Swap({ history }: RouteComponentProps) {
             isChartDisplayed={isChartDisplayed}
             currentSwapPrice={singleTokenPrice}
           />
-        )}
-        <BottomDrawer
+        )} */}
+        {/* <BottomDrawer
           content={
             <PriceChartContainer
               inputCurrencyId={inputCurrencyId}
@@ -385,7 +385,7 @@ export default function Swap({ history }: RouteComponentProps) {
           }
           isOpen={isChartDisplayed}
           setIsOpen={setIsChartDisplayed}
-        />
+        /> */}
         <Flex flexDirection="column">
           <StyledSwapContainer $isChartExpanded={isChartExpanded}>
             <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'} mr={isChartExpanded ? '0' : '0'}>
