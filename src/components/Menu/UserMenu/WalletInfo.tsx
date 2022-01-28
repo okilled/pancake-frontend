@@ -48,14 +48,14 @@ const WalletInfo: React.FC<WalletInfoProps> = ({ hasLowBnbBalance, onDismiss }) 
           <Text>{formatBigNumber(balance, 6)}</Text>
         )}
       </Flex>
-      <Flex alignItems="center" justifyContent="space-between" mb="24px">
+      {/* <Flex alignItems="center" justifyContent="space-between" mb="24px">
         <Text color="textSubtle">{t('CAKE Balance')}</Text>
         {cakeFetchStatus !== FetchStatus.SUCCESS ? (
           <Skeleton height="22px" width="60px" />
         ) : (
           <Text>{getFullDisplayBalance(cakeBalance, 18, 3)}</Text>
         )}
-      </Flex>
+      </Flex> */}
       <Flex alignItems="center" justifyContent="end" mb="24px">
         <LinkExternal href={getBscScanLink(account, 'address')}>{t('View on BscScan')}</LinkExternal>
       </Flex>
