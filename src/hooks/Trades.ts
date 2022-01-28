@@ -11,6 +11,9 @@ import {
   CUSTOM_BASES,
   BETTER_TRADE_LESS_HOPS_THRESHOLD,
   ADDITIONAL_BASES,
+  PANCAKE_SWAP_PAIR,
+  PANCAKE_FACTORY_ADDRESS,
+  PANCAKE_FACTORY_INIT_CODE,
 } from '../config/constants'
 import { PairState, usePairs } from './usePairs'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
@@ -72,7 +75,22 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
     [tokenA, tokenB, bases, basePairs, chainId],
   )
 
-  const allPairs = usePairs(allPairCombinations)
+  const [factoryAddress, initCode] = useMemo(() => {
+    return tokenA && tokenB
+      ? PANCAKE_SWAP_PAIR.find(
+          (item) =>
+            item.tokens.includes(tokenA.address.toLocaleLowerCase()) &&
+            item.tokens.includes(tokenB.address.toLocaleLowerCase()),
+        )
+        ? [PANCAKE_FACTORY_ADDRESS, PANCAKE_FACTORY_INIT_CODE]
+        : []
+      : []
+  }, [tokenA, tokenB])
+
+  console.log('PANCAKE_FACTORY_ADDRESS:', factoryAddress)
+
+  /// TODO: INIT_CODE 和 Factory 地址
+  const allPairs = usePairs(allPairCombinations, factoryAddress, initCode)
 
   // only pass along valid pairs, non-duplicated pairs
   return useMemo(

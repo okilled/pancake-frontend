@@ -5,11 +5,42 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@pancakeswap/sdk'
-import { ROUTER_ADDRESS } from '../config/constants'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER, Trade } from '@pancakeswap/sdk'
+import tokens from 'config/constants/tokens'
+import { PANCAKE_ROUTER_ADDRESS, PANCAKE_SWAP_PAIR, ROUTER_ADDRESS } from '../config/constants'
 import { BASE_BSC_SCAN_URLS } from '../config'
 import { TokenAddressMap } from '../state/lists/hooks'
 import { simpleRpcProvider } from './providers'
+
+export function getSwapRouterAddress(trade: Trade | undefined): string {
+  let routerAddress = ROUTER_ADDRESS
+
+  if (trade) {
+    let inputAddress = trade.route.input!.address
+    let outputAddress = trade.route.output!.address
+
+    if (!inputAddress && trade.route.input.symbol === 'BNB') {
+      inputAddress = tokens.wbnb.address
+    }
+    if (!outputAddress && trade.route.output.symbol === 'BNB') {
+      outputAddress = tokens.wbnb.address
+    }
+
+    if (
+      inputAddress &&
+      inputAddress &&
+      PANCAKE_SWAP_PAIR.find(
+        (item) =>
+          item.tokens.includes(inputAddress!.toLocaleLowerCase()) &&
+          item.tokens.includes(outputAddress!.toLocaleLowerCase()),
+      )
+    ) {
+      routerAddress = PANCAKE_ROUTER_ADDRESS
+    }
+  }
+
+  return routerAddress
+}
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -92,8 +123,13 @@ export function getContract(address: string, ABI: any, signer?: ethers.Signer | 
 }
 
 // account is optional
-export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, getProviderOrSigner(library, account))
+export function getRouterContract(
+  _: number,
+  library: Web3Provider,
+  account?: string,
+  routerAddress?: string,
+): Contract {
+  return getContract(routerAddress ?? ROUTER_ADDRESS, IUniswapV2Router02ABI, getProviderOrSigner(library, account))
 }
 
 export function escapeRegExp(string: string): string {
