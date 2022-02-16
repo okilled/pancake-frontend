@@ -1,24 +1,20 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
 import { mainnetTokens, testnetTokens } from './tokens'
 
-// export const ROUTER_ADDRESS = '0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3'
+export const ROUTER_ADDRESS = '0x8f816b50bF20912e57cEfeE1ad6B6F7D20ab976e'
 
-// 0xCb8ED14E89Ec72b10e548d096DEB7fE7eFe88D45  ninance 01
-export const ROUTER_ADDRESS = '0xc9A67FC731c65110Bc66F55570d1a8F692fC6886'
+export const PANCAKE_ROUTER_ADDRESS = '0x10ED43C718714eb63d5aA57B78B54704E256024E'
 
-export const PANCAKE_ROUTER_ADDRESS = '0x29f477CF36AB141066762C8d689C12e9e70D0a34'
+export const PANCAKE_FACTORY_ADDRESS = '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
+export const PANCAKE_FACTORY_INIT_CODE = '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5'
 
-export const PANCAKE_FACTORY_ADDRESS = '0xAc78e3edfccA3b239BCEAb8F5805C0EC5E223585'
-export const PANCAKE_FACTORY_INIT_CODE = '0xea6e57cd3911a626a540e0ba7da597dbec28808581dc33346714eb2b87d15109'
+export const PANCAKE_SWAP_PAIR = [
+  {
+    tokens: ['0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', '0x55d398326f99059fF775485246999027B3197955'],
+    pair: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
+  },
+]
 
-// export const PANCAKE_SWAP_PAIR = [
-//   {
-//     tokens: ['0x73fa7a8aa8ae374035757184258418d5c266a439', '0x7d2e92c717939e3b4ac1cb385483b749fadbb531'],
-//     pair: '0x9eE1EC57cAf97096455daab9Af3aa91784A49673',
-//   },
-// ]
-
-export const PANCAKE_SWAP_PAIR = []
 // a list of tokens by chain
 type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
