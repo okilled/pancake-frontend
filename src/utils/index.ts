@@ -31,8 +31,8 @@ export function getSwapRouterAddress(trade: Trade | undefined): string {
       inputAddress &&
       PANCAKE_SWAP_PAIR.find(
         (item) =>
-          item.tokens.includes(inputAddress!.toLocaleLowerCase()) &&
-          item.tokens.includes(outputAddress!.toLocaleLowerCase()),
+          item.tokens.includes(ethers.utils.getAddress(inputAddress)) &&
+          item.tokens.includes(ethers.utils.getAddress(outputAddress)),
       )
     ) {
       routerAddress = PANCAKE_ROUTER_ADDRESS

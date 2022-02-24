@@ -3,6 +3,7 @@ import { isTradeBetter } from 'utils/trades'
 import { Currency, CurrencyAmount, Pair, Token, Trade } from '@pancakeswap/sdk'
 import flatMap from 'lodash/flatMap'
 import { useMemo } from 'react'
+import { ethers } from 'ethers'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 
 import { useUserSingleHopOnly } from 'state/user/hooks'
@@ -79,8 +80,8 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
     return tokenA && tokenB
       ? PANCAKE_SWAP_PAIR.find(
           (item) =>
-            item.tokens.includes(tokenA.address.toLocaleLowerCase()) &&
-            item.tokens.includes(tokenB.address.toLocaleLowerCase()),
+            item.tokens.includes(ethers.utils.getAddress(tokenA.address)) &&
+            item.tokens.includes(ethers.utils.getAddress(tokenB.address.toLocaleLowerCase())),
         )
         ? [PANCAKE_FACTORY_ADDRESS, PANCAKE_FACTORY_INIT_CODE]
         : []

@@ -1,4 +1,5 @@
 import { ChainId, JSBI, Percent, Token } from '@pancakeswap/sdk'
+import { utils } from 'ethers'
 import { mainnetTokens, testnetTokens } from './tokens'
 
 export const ROUTER_ADDRESS = '0x8f816b50bF20912e57cEfeE1ad6B6F7D20ab976e'
@@ -10,8 +11,11 @@ export const PANCAKE_FACTORY_INIT_CODE = '0x00fb7f630766e6a796048ea87d01acd3068e
 
 export const PANCAKE_SWAP_PAIR = [
   {
-    tokens: ['0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c', '0x55d398326f99059ff775485246999027b3197955'],
-    pair: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
+    tokens: [
+      utils.getAddress('0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c'),
+      utils.getAddress('0x55d398326f99059ff775485246999027b3197955'),
+    ],
+    pair: utils.getAddress('0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE'),
   },
 ]
 
