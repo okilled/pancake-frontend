@@ -46,6 +46,8 @@ export default function AddLiquidity({
   history,
 }: RouteComponentProps<{ currencyIdA?: string; currencyIdB?: string }>) {
   const { account, chainId, library } = useActiveWeb3React()
+  const [loading, setLoading] = useState(false)
+
   const dispatch = useDispatch<AppDispatch>()
   const { t } = useTranslation()
   const gasPrice = useGasPrice()
@@ -176,6 +178,7 @@ export default function AddLiquidity({
     }
 
     setAttemptingTxn(true)
+    setLoading(true)
     await estimate(...args, value ? { value } : {})
       .then((estimatedGasLimit) =>
         method(...args, {
@@ -184,7 +187,7 @@ export default function AddLiquidity({
           gasPrice,
         }).then((response) => {
           setAttemptingTxn(false)
-
+          setLoading(false)
           addTransaction(response, {
             summary: `Add ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(3)} ${
               currencies[Field.CURRENCY_A]?.symbol
@@ -196,6 +199,7 @@ export default function AddLiquidity({
       )
       .catch((err) => {
         setAttemptingTxn(false)
+        setLoading(false)
         // we only care if the error is something _other_ than the user rejected the tx
         if (err?.code !== 4001) {
           console.error(err)
@@ -431,12 +435,14 @@ export default function AddLiquidity({
                     </RowBetween>
                   )}
                 <Button
+                  isLoading={loading}
                   variant={
                     !isValid && !!parsedAmounts[Field.CURRENCY_A] && !!parsedAmounts[Field.CURRENCY_B]
                       ? 'danger'
                       : 'primary'
                   }
                   onClick={() => {
+                    if (loading) return
                     if (expertMode) {
                       onAdd()
                     } else {

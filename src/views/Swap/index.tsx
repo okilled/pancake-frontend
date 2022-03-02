@@ -94,6 +94,7 @@ export default function Swap({ history }: RouteComponentProps) {
   const [isChartExpanded, setIsChartExpanded] = useState(false)
   const [userChartPreference, setUserChartPreference] = useExchangeChartManager(isMobile)
   const [isChartDisplayed, setIsChartDisplayed] = useState(userChartPreference)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setUserChartPreference(isChartDisplayed)
@@ -228,6 +229,8 @@ export default function Swap({ history }: RouteComponentProps) {
     if (!swapCallback) {
       return
     }
+    setLoading(true)
+
     setSwapState({ attemptingTxn: true, tradeToConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then((hash) => {
@@ -240,6 +243,9 @@ export default function Swap({ history }: RouteComponentProps) {
           swapErrorMessage: error.message,
           txHash: undefined,
         })
+      })
+      .finally(() => {
+        setLoading(false)
       })
   }, [priceImpactWithoutFee, swapCallback, tradeToConfirm, t])
 
@@ -528,8 +534,11 @@ export default function Swap({ history }: RouteComponentProps) {
                           )}
                         </Button>
                         <Button
+                          isLoading={loading}
                           variant={isValid && priceImpactSeverity > 2 ? 'danger' : 'primary'}
                           onClick={() => {
+                            if (loading) return
+
                             if (isExpertMode) {
                               handleSwap()
                             } else {
@@ -560,7 +569,10 @@ export default function Swap({ history }: RouteComponentProps) {
                     ) : (
                       <Button
                         variant={isValid && priceImpactSeverity > 2 && !swapCallbackError ? 'danger' : 'primary'}
+                        isLoading={loading}
                         onClick={() => {
+                          if (loading) return
+
                           if (isExpertMode) {
                             handleSwap()
                           } else {
