@@ -20,7 +20,7 @@ import EasterEgg from './components/EasterEgg'
 import GlobalCheckClaimStatus from './components/GlobalCheckClaimStatus'
 import history from './routerHistory'
 // Views included in the main bundle
-import Pools from './views/Pools'
+// import Pools from './views/Pools'
 import Swap from './views/Swap'
 import {
   RedirectDuplicateTokenIds,
@@ -56,6 +56,7 @@ const Info = lazy(() => import('./views/Info'))
 const NftMarket = lazy(() => import('./views/Nft/market'))
 const ProfileCreation = lazy(() => import('./views/ProfileCreation'))
 const PancakeSquad = lazy(() => import('./views/PancakeSquad'))
+const NinanceLP = lazy(() => import('./views/NinanceLP'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -92,9 +93,6 @@ const App: React.FC = () => {
             <Route path="/farms">
               <Farms />
             </Route>
-            <Route path="/pools">
-              <Pools />
-            </Route>
             <Route path="/lottery">
               <Lottery />
             </Route>
@@ -128,6 +126,14 @@ const App: React.FC = () => {
             <Route path="/voting/proposal/:id">
               <Proposal />
             </Route> */}
+
+            {/* <Route path="/pools">
+              <Pools />
+            </Route> */}
+
+            <Route path="/NinanceLP">
+              <NinanceLP />
+            </Route>
 
             {/* NFT */}
             {/* <Route path="/nfts">
@@ -163,14 +169,17 @@ const App: React.FC = () => {
             <Route path="/">
               <Redirect to="/swap" />
             </Route>
-            {/* <Route path="/pool">
-              <Redirect to="/liquidity" />
-            </Route>
             <Route path="/staking">
-              <Redirect to="/pools" />
+              <Redirect to="/NinanceLP" />
             </Route>
             <Route path="/syrup">
-              <Redirect to="/pools" />
+              <Redirect to="/NinanceLP" />
+            </Route>
+            <Route path="/pool">
+              <Redirect to="/liquidity" />
+            </Route>
+            {/* <Route path="/pool">
+              <Redirect to="/liquidity" />
             </Route>
             <Route path="/collectibles">
               <Redirect to="/nfts" />

@@ -42,7 +42,13 @@ const DualTag: React.FC<TagProps> = (props) => {
 const ManualPoolTag: React.FC<TagProps> = (props) => {
   const { t } = useTranslation()
   return (
-    <Tag variant="secondary" outline startIcon={<RefreshIcon width="18px" color="secondary" mr="4px" />} {...props}>
+    <Tag
+      fontWeight="bolder"
+      variant="secondary"
+      outline
+      startIcon={<RefreshIcon width="18px" color="secondary" mr="4px" />}
+      {...props}
+    >
       {t('Manual')}
     </Tag>
   )
@@ -51,7 +57,13 @@ const ManualPoolTag: React.FC<TagProps> = (props) => {
 const CompoundingPoolTag: React.FC<TagProps> = (props) => {
   const { t } = useTranslation()
   return (
-    <Tag variant="success" outline startIcon={<AutoRenewIcon width="18px" color="success" mr="4px" />} {...props}>
+    <Tag
+      fontWeight="bolder"
+      variant="secondary"
+      outline
+      startIcon={<AutoRenewIcon width="18px" color="success" mr="4px" />}
+      {...props}
+    >
       {t('Auto')}
     </Tag>
   )
