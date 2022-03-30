@@ -1,136 +1,103 @@
-import React from 'react'
-import styled from 'styled-components'
-import BigNumber from 'bignumber.js'
-import { Button, useModal, IconButton, AddIcon, MinusIcon, Skeleton, useTooltip, Flex, Text } from '@pancakeswap/uikit'
-import ConnectWalletButton from 'components/ConnectWalletButton'
-import { useWeb3React } from '@web3-react/core'
-import { useVaultPoolByKey } from 'state/pools/hooks'
-import { DeserializedPool } from 'state/types'
 import Balance from 'components/Balance'
+import ConnectWalletButton from 'components/ConnectWalletButton'
+import tokens from 'config/constants/tokens'
+import useRefresh from 'hooks/useRefresh'
+import useToast from 'hooks/useToast'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { Button, Flex, Modal, Text, useModal } from '@pancakeswap/uikit'
+import { useWeb3React } from '@web3-react/core'
+import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
+import { ethers } from 'ethers'
 import { useTranslation } from 'contexts/Localization'
-import { getBalanceNumber } from 'utils/formatBalance'
-import { PoolCategory } from 'config/constants/types'
-import { BIG_ZERO } from 'utils/bigNumber'
-import { useERC20 } from 'hooks/useContract'
-import { convertSharesToCake } from 'views/Pools/helpers'
-import { ActionContainer, ActionTitles, ActionContent } from './styles'
-import NotEnoughTokensModal from '../../PoolCard/Modals/NotEnoughTokensModal'
-import StakeModal from '../../PoolCard/Modals/StakeModal'
-import VaultStakeModal from '../../CakeVaultCard/VaultStakeModal'
-import { useCheckVaultApprovalStatus, useApprovePool, useVaultApprove } from '../../../hooks/useApprove'
+import { getNinanceFramAddress } from 'utils/addressHelpers'
+import { useERC20, useNinanceFarmContract } from 'hooks/useContract'
+import { useTokenBalance } from 'state/wallet/hooks'
+import { usePair } from 'hooks/usePairs'
+import { NINANCE_ERA_USDT_PAIR } from 'config/constants'
+import { ConfirmationPendingContent } from 'components/TransactionConfirmationModal'
+import { formatBigNumberToFixed } from 'utils/formatBalance'
 
-const IconButtonWrapper = styled.div`
-  display: flex;
-`
+import ActionTitle from './ActionTitle'
+import StakeList from './StakeList'
+import { ActionContainer, ActionContent, ActionTitles, StakeContent } from './styles'
 
-interface StackedActionProps {
-  pool: DeserializedPool
-  userDataLoaded: boolean
-}
-
-const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoaded }) => {
-  const {
-    sousId,
-    stakingToken,
-    earningToken,
-    stakingLimit,
-    isFinished,
-    poolCategory,
-    userData,
-    stakingTokenPrice,
-    vaultKey,
-  } = pool
+const Staked = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
+  const ninanceFarmContract = useNinanceFarmContract()
+  const { callWithGasPrice } = useCallWithGasPrice()
+  const { toastSuccess, toastError } = useToast()
+  const [, pair] = usePair(tokens.usdt, tokens.era)
+  const userPoolBalance = useTokenBalance(account ?? undefined, pair?.liquidityToken)
+  const erc20 = useERC20(NINANCE_ERA_USDT_PAIR)
+  const { fastRefresh } = useRefresh()
 
-  const stakingTokenContract = useERC20(stakingToken.address || '')
-  const { handleApprove: handlePoolApprove, requestedApproval: requestedPoolApproval } = useApprovePool(
-    stakingTokenContract,
-    sousId,
-    earningToken.symbol,
+  const [stakeQuantity, setStakeQuantity] = useState(25)
+  const [hasApprove, setHasApprove] = useState(false)
+
+  const poolBalance = useMemo(() => {
+    return ethers.utils.parseEther(userPoolBalance?.toExact() ?? '0')
+  }, [userPoolBalance])
+
+  const displayPoolBalanceNum = useMemo(() => {
+    return Number(userPoolBalance?.toFixed(5))
+  }, [userPoolBalance])
+
+  const [open, close] = useModal(
+    <Modal title="1" headerBackground="gradients.cardHeader">
+      <ConfirmationPendingContent pendingText="" />
+    </Modal>,
+    false,
+    false,
   )
 
-  const { isVaultApproved, setLastUpdated } = useCheckVaultApprovalStatus(pool.vaultKey)
-  const { handleApprove: handleVaultApprove, requestedApproval: requestedVaultApproval } = useVaultApprove(
-    pool.vaultKey,
-    setLastUpdated,
-  )
+  const calcAmount = useCallback(() => {
+    // -1 === max
+    return stakeQuantity === -1 ? poolBalance : poolBalance.div(100).mul(stakeQuantity)
+  }, [stakeQuantity, poolBalance])
 
-  const handleApprove = vaultKey ? handleVaultApprove : handlePoolApprove
-  const requestedApproval = vaultKey ? requestedVaultApproval : requestedPoolApproval
+  // useEffect(() => {
+  //   const checkApprove = async () => {
+  //     const amount = await erc20.allowance(account, getNinanceFramAddress())
 
-  const isBnbPool = poolCategory === PoolCategory.BINANCE
-  const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
-  const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
-  const isNotVaultAndHasStake = !vaultKey && stakedBalance.gt(0)
+  //     setHasApprove(+formatBigNumberToFixed(amount) >= +formatBigNumberToFixed(calcAmount()))
+  //   }
+  //   checkApprove()
+  // }, [fastRefresh, account, calcAmount, erc20])
 
-  const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
-
-  const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
-  const stakedTokenDollarBalance = getBalanceNumber(
-    stakedBalance.multipliedBy(stakingTokenPrice),
-    stakingToken.decimals,
-  )
-
-  const {
-    userData: { userShares },
-    pricePerFullShare,
-  } = useVaultPoolByKey(pool.vaultKey)
-
-  const { cakeAsBigNumber, cakeAsNumberBalance } = convertSharesToCake(userShares, pricePerFullShare)
-  const hasSharesStaked = userShares && userShares.gt(0)
-  const isVaultWithShares = vaultKey && hasSharesStaked
-  const stakedAutoDollarValue = getBalanceNumber(cakeAsBigNumber.multipliedBy(stakingTokenPrice), stakingToken.decimals)
-
-  const needsApproval = vaultKey ? !isVaultApproved : !allowance.gt(0) && !isBnbPool
-
-  const [onPresentTokenRequired] = useModal(<NotEnoughTokensModal tokenSymbol={stakingToken.symbol} />)
-
-  const [onPresentStake] = useModal(
-    <StakeModal
-      isBnbPool={isBnbPool}
-      pool={pool}
-      stakingTokenBalance={stakingTokenBalance}
-      stakingTokenPrice={stakingTokenPrice}
-    />,
-  )
-
-  const [onPresentVaultStake] = useModal(<VaultStakeModal stakingMax={stakingTokenBalance} pool={pool} />)
-
-  const [onPresentUnstake] = useModal(
-    <StakeModal
-      stakingTokenBalance={stakingTokenBalance}
-      isBnbPool={isBnbPool}
-      pool={pool}
-      stakingTokenPrice={stakingTokenPrice}
-      isRemovingStake
-    />,
-  )
-
-  const [onPresentVaultUnstake] = useModal(<VaultStakeModal stakingMax={cakeAsBigNumber} pool={pool} isRemovingStake />)
-
-  const onStake = () => {
-    if (vaultKey) {
-      onPresentVaultStake()
-    } else {
-      onPresentStake()
+  const enabled = async () => {
+    open()
+    try {
+      const amount = calcAmount()
+      const approveTx = await callWithGasPrice(erc20, 'approve', [getNinanceFramAddress(), amount])
+      const receipt = await approveTx.wait()
+      if (receipt.status) {
+        setHasApprove(true)
+        toastSuccess(t('Success'))
+      } else {
+        toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
+      }
+    } finally {
+      close()
     }
   }
 
-  const onUnstake = () => {
-    if (vaultKey) {
-      onPresentVaultUnstake()
-    } else {
-      onPresentUnstake()
+  const confirm = async () => {
+    open()
+    try {
+      const amount = calcAmount()
+      const tx = await callWithGasPrice(ninanceFarmContract, 'deposit', ['0', amount])
+      const receipt = await tx.wait()
+      if (receipt.status) {
+        setHasApprove(false)
+        toastSuccess(t('Success'))
+      } else {
+        toastError(t('Error'), t('Please try again. Confirm the transaction and make sure you are paying enough gas!'))
+      }
+    } finally {
+      close()
     }
   }
-
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(
-    t("You've already staked the maximum amount you can stake in this pool!"),
-    { placement: 'bottom' },
-  )
-
-  const reachStakingLimit = stakingLimit.gt(0) && userData.stakedBalance.gte(stakingLimit)
 
   if (!account) {
     return (
@@ -147,116 +114,82 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({ pool, userDataLoa
     )
   }
 
-  if (!userDataLoaded) {
-    return (
+  return (
+    <Flex flexDirection="column" flex={1}>
       <ActionContainer>
         <ActionTitles>
-          <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
+          <Text fontSize="12px" bold color="secondary" as="span" textTransform="uppercase">
             {t('Start staking')}
           </Text>
         </ActionTitles>
-        <ActionContent>
-          <Skeleton width={180} height="32px" marginTop={14} />
-        </ActionContent>
-      </ActionContainer>
-    )
-  }
-
-  if (needsApproval) {
-    return (
-      <ActionContainer>
-        <ActionTitles>
-          <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
-            {t('Enable pool')}
-          </Text>
-        </ActionTitles>
-        <ActionContent>
-          <Button width="100%" disabled={requestedApproval} onClick={handleApprove} variant="secondary">
-            {t('Enable')}
-          </Button>
-        </ActionContent>
-      </ActionContainer>
-    )
-  }
-
-  // Wallet connected, user data loaded and approved
-  if (isNotVaultAndHasStake || isVaultWithShares) {
-    return (
-      <ActionContainer isAutoVault={!!vaultKey}>
-        <ActionTitles>
-          <Text fontSize="12px" bold color="secondary" as="span" textTransform="uppercase">
-            {stakingToken.symbol}{' '}
-          </Text>
-          <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
-            {vaultKey ? t('Staked (compounding)') : t('Staked')}
-          </Text>
-        </ActionTitles>
-        <ActionContent>
-          <Flex flex="1" pt="16px" flexDirection="column" alignSelf="flex-start">
+        <StakeContent>
+          <Flex justifyContent="space-between">
+            <ActionTitle>{t('NINANCE-LP Balance')}</ActionTitle>
             <Balance
-              lineHeight="1"
+              color="primary"
               bold
-              fontSize="20px"
-              decimals={5}
-              value={vaultKey ? cakeAsNumberBalance : stakedTokenBalance}
-            />
-            <Balance
               fontSize="12px"
-              display="inline"
-              color="textSubtle"
-              decimals={2}
-              value={vaultKey ? stakedAutoDollarValue : stakedTokenDollarBalance}
-              unit=" USD"
-              prefix="~"
+              decimals={5}
+              value={displayPoolBalanceNum}
+              unit="USDT/ERA-LP"
             />
           </Flex>
-          <IconButtonWrapper>
-            <IconButton variant="secondary" onClick={onUnstake} mr="6px">
-              <MinusIcon color="primary" width="14px" />
-            </IconButton>
-            {reachStakingLimit ? (
-              <span ref={targetRef}>
-                <IconButton variant="secondary" disabled>
-                  <AddIcon color="textDisabled" width="24px" height="24px" />
-                </IconButton>
-              </span>
-            ) : (
-              <IconButton
-                variant="secondary"
-                onClick={stakingTokenBalance.gt(0) ? onStake : onPresentTokenRequired}
-                disabled={isFinished}
+          <Flex justifyContent="space-between" alignItems="center" mt="12px">
+            <ActionTitle>{t('Stake Quantity')}</ActionTitle>
+            <Flex>
+              <Button
+                mr="2px"
+                scale="xs"
+                onClick={() => {
+                  setStakeQuantity(25)
+                }}
+                variant={stakeQuantity === 25 ? 'primary' : 'tertiary'}
               >
-                <AddIcon color="primary" width="14px" />
-              </IconButton>
-            )}
-          </IconButtonWrapper>
-          {tooltipVisible && tooltip}
-        </ActionContent>
+                25%
+              </Button>
+              <Button
+                mr="2px"
+                scale="xs"
+                onClick={() => {
+                  setStakeQuantity(50)
+                }}
+                variant={stakeQuantity === 50 ? 'primary' : 'tertiary'}
+              >
+                50%
+              </Button>
+              <Button
+                mr="2px"
+                scale="xs"
+                onClick={() => {
+                  setStakeQuantity(75)
+                }}
+                variant={stakeQuantity === 75 ? 'primary' : 'tertiary'}
+              >
+                75%
+              </Button>
+              <Button
+                mr="2px"
+                scale="xs"
+                onClick={() => {
+                  setStakeQuantity(-1)
+                }}
+                variant={stakeQuantity === -1 ? 'primary' : 'tertiary'}
+              >
+                MAX
+              </Button>
+            </Flex>
+          </Flex>
+          <Flex justifyContent="space-between" mt="20px">
+            <Button variant="primary" scale="sm" width="100%" onClick={hasApprove ? confirm : enabled}>
+              {hasApprove ? t('Confirm') : t('Enabled')}
+            </Button>
+          </Flex>
+        </StakeContent>
       </ActionContainer>
-    )
-  }
-
-  return (
-    <ActionContainer>
-      <ActionTitles>
-        <Text fontSize="12px" bold color="secondary" as="span" textTransform="uppercase">
-          {t('Stake')}{' '}
-        </Text>
-        <Text fontSize="12px" bold color="textSubtle" as="span" textTransform="uppercase">
-          {stakingToken.symbol}
-        </Text>
-      </ActionTitles>
-      <ActionContent>
-        <Button
-          width="100%"
-          onClick={stakingTokenBalance.gt(0) ? onStake : onPresentTokenRequired}
-          variant="secondary"
-          disabled={isFinished}
-        >
-          {t('Stake')}
-        </Button>
-      </ActionContent>
-    </ActionContainer>
+      <ActionContainer>
+        <StakeList />
+      </ActionContainer>
+    </Flex>
   )
 }
 

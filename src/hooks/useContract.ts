@@ -32,6 +32,8 @@ import {
   getNftSaleContract,
   getPancakeSquadContract,
   getErc721CollectionContract,
+  getNinanceFarmContract,
+  getLpContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -293,4 +295,14 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
 
 export function useMulticallContract(): Contract | null {
   return useContract(getMulticallAddress(), multiCallAbi, false)
+}
+
+export const useNinanceFarmContract = () => {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getNinanceFarmContract(library.getSigner()), [library])
+}
+
+export const useNinanceLPContract = (address: string) => {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getLpContract(address, library.getSigner()), [address, library])
 }

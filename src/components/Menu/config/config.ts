@@ -20,7 +20,7 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
         href: '/liquidity',
       },
       {
-        label: t('Ninance-LP'),
+        label: t('Farms'),
         href: '/NinanceLP',
       },
     ],

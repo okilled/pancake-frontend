@@ -1,37 +1,74 @@
-import React, { useMemo } from 'react'
-import { Flex, Skeleton, Text } from '@pancakeswap/uikit'
-import styled from 'styled-components'
-import { useTranslation } from 'contexts/Localization'
-import BigNumber from 'bignumber.js'
 import Balance from 'components/Balance'
-import { DeserializedPool } from 'state/types'
-import { useVaultPoolByKey, useVaultPools } from 'state/pools/hooks'
-import { getBalanceNumber } from 'utils/formatBalance'
-import { BIG_ZERO } from 'utils/bigNumber'
-import BaseCell, { CellContent } from './BaseCell'
+import React from 'react'
+import styled from 'styled-components'
+import { Flex, Skeleton, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
+
+import BaseCell from './BaseCell'
 
 interface CellProps {
-  value: string
+  value: number
   title: string
+  loading: boolean
+  account: string
+  unit?: string
 }
 
 const StyledCell = styled(BaseCell)`
-  flex: 2 0 100px;
+  flex: 1;
+  padding: 8px 0;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    flex: 2 0 100px;
+    padding: 24px 8px;
+  }
 `
 
-const Cell: React.FC<CellProps> = ({ value, title }) => {
+const CellContent = styled(Flex)`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 40px;
+  ${Text} {
+    line-height: 1;
+  }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+`
+
+const Cell: React.FC<CellProps> = ({ value, title, loading, account, unit }) => {
+  const { isXs, isSm, isMd } = useMatchBreakpoints()
+
+  if (!account) {
+    return (
+      <StyledCell role="cell">
+        <CellContent>
+          <Text fontSize={isXs || isSm || isMd ? '16px' : '14px'} color="textSubtle" textAlign="left">
+            {title}
+          </Text>
+          <Flex height="20px" alignItems="center">
+            <Balance fontSize="16px" value={0} decimals={4} color="primary" unit={unit} />
+          </Flex>
+        </CellContent>
+      </StyledCell>
+    )
+  }
+
   return (
     <StyledCell role="cell">
       <CellContent>
-        <Text fontSize="12px" color="textSubtle" textAlign="left">
+        <Text fontSize={isXs || isSm || isMd ? '16px' : '14px'} color="textSubtle" textAlign="left">
           {title}
         </Text>
-        {value ? (
-          <Flex height="20px" alignItems="center">
-            <Balance fontSize="16px" value={0} decimals={2} color="primary" />
-          </Flex>
-        ) : (
+        {loading ? (
           <Skeleton width="80px" height="16px" />
+        ) : (
+          <Flex height="20px" alignItems="center">
+            <Balance fontSize="16px" value={value ?? 0} decimals={4} color="primary" unit={unit} />
+          </Flex>
         )}
       </CellContent>
     </StyledCell>

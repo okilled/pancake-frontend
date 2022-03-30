@@ -1,65 +1,17 @@
 import React from 'react'
-import styled, { keyframes, css } from 'styled-components'
-import {
-  Box,
-  Button,
-  Flex,
-  HelpIcon,
-  Link,
-  MetamaskIcon,
-  Skeleton,
-  Text,
-  TimerIcon,
-  useTooltip,
-  OpenNewIcon,
-} from '@pancakeswap/uikit'
-import { BASE_BSC_SCAN_URL } from 'config'
-import { getBscScanLink } from 'utils'
-import { useBlock } from 'state/block/hooks'
-import { useVaultPoolByKey, useVaultPools } from 'state/pools/hooks'
-import BigNumber from 'bignumber.js'
-import { DeserializedPool } from 'state/types'
+import styled from 'styled-components'
+import { Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import Balance from 'components/Balance'
-import { CompoundingPoolTag, ManualPoolTag } from 'components/Tags'
-import { getAddress, getVaultPoolAddress } from 'utils/addressHelpers'
-import { BIG_ZERO } from 'utils/bigNumber'
-import { registerToken } from 'utils/wallet'
-import { getBalanceNumber, getFullDisplayBalance } from 'utils/formatBalance'
-import { convertSharesToCake, getPoolBlockInfo } from 'views/Pools/helpers'
-import { vaultPoolConfig } from 'config/constants/pools'
+
+import APY from '../Cells/APY'
+import IndividualProportion from '../Cells/IndividualProportion'
+import TotalCommunityStaking from '../Cells/TotalCommunityStaking'
+import TotalPersonalStaking from '../Cells/TotalPersonalStaking'
+import DividendInfo from './DividendInfo'
 import Harvest from './Harvest'
 import Stake from './Stake'
-import Apr from '../Apr'
-import AutoHarvest from './AutoHarvest'
-
-const expandAnimation = keyframes`
-  from {
-    max-height: 0px;
-  }
-  to {
-    max-height: 700px;
-  }
-`
-
-const collapseAnimation = keyframes`
-  from {
-    max-height: 700px;
-  }
-  to {
-    max-height: 0px;
-  }
-`
 
 const StyledActionPanel = styled.div<{ expanded: boolean }>`
-  animation: ${({ expanded }) =>
-    expanded
-      ? css`
-          ${expandAnimation} 300ms linear forwards
-        `
-      : css`
-          ${collapseAnimation} 300ms linear forwards
-        `};
   overflow: hidden;
   background: ${({ theme }) => theme.colors.dropdown};
   display: flex;
@@ -79,7 +31,7 @@ const ActionContainer = styled.div`
 
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     flex-grow: 1;
     flex-basis: 0;
   }
@@ -96,8 +48,6 @@ type MediaBreakpoints = {
 
 interface ActionPanelProps {
   account: string
-  pool: DeserializedPool
-  userDataLoaded: boolean
   expanded: boolean
   breakpoints: MediaBreakpoints
 }
@@ -109,216 +59,26 @@ const InfoSection = styled(Box)`
   padding: 8px 8px;
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: 0;
-    flex-basis: 230px;
+    flex-basis: 200px;
   }
 `
 
-const LinkExternal: React.FC<{ href: string }> = ({ children, ...props }) => {
-  return (
-    <Button
-      variant="secondary"
-      as="a"
-      external
-      endIcon={<OpenNewIcon color="primary" width="14px" />}
-      height="40px"
-      style={{ fontSize: '14px', fontWeight: 'bolder' }}
-      {...props}
-    >
-      {children}
-    </Button>
-  )
-}
-
-const ActionPanel: React.FC<ActionPanelProps> = ({ account, pool, userDataLoaded, expanded, breakpoints }) => {
-  const {
-    sousId,
-    stakingToken,
-    earningToken,
-    totalStaked,
-    startBlock,
-    endBlock,
-    stakingLimit,
-    contractAddress,
-    userData,
-    vaultKey,
-  } = pool
+const ActionPanel: React.FC<ActionPanelProps> = ({ account, expanded, breakpoints }) => {
   const { t } = useTranslation()
-  const poolContractAddress = getAddress(contractAddress)
-  const vaultContractAddress = getVaultPoolAddress(vaultKey)
-  const { currentBlock } = useBlock()
   const { isXs, isSm, isMd } = breakpoints
-  const showSubtitle = (isXs || isSm) && sousId === 0
-
-  const { shouldShowBlockCountdown, blocksUntilStart, blocksRemaining, hasPoolStarted, blocksToDisplay } =
-    getPoolBlockInfo(pool, currentBlock)
-
-  const isMetaMaskInScope = !!window.ethereum?.isMetaMask
-  const tokenAddress = earningToken.address || ''
-
-  const {
-    totalCakeInVault,
-    userData: { userShares },
-    fees: { performanceFeeAsDecimal },
-    pricePerFullShare,
-  } = useVaultPoolByKey(vaultKey)
-
-  const vaultPools = useVaultPools()
-  const cakeInVaults = Object.values(vaultPools).reduce((total, vault) => {
-    return total.plus(vault.totalCakeInVault)
-  }, BIG_ZERO)
-
-  const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
-  const stakedBalance = userData?.stakedBalance ? new BigNumber(userData.stakedBalance) : BIG_ZERO
-  const { cakeAsBigNumber } = convertSharesToCake(userShares, pricePerFullShare)
-  const poolStakingTokenBalance = vaultKey
-    ? cakeAsBigNumber.plus(stakingTokenBalance)
-    : stakedBalance.plus(stakingTokenBalance)
-
-  const isManualCakePool = sousId === 0
-
-  const getTotalStakedBalance = () => {
-    if (vaultKey) {
-      return getBalanceNumber(totalCakeInVault, stakingToken.decimals)
-    }
-    if (isManualCakePool) {
-      const manualCakeTotalMinusAutoVault = new BigNumber(totalStaked).minus(cakeInVaults)
-      return getBalanceNumber(manualCakeTotalMinusAutoVault, stakingToken.decimals)
-    }
-    return getBalanceNumber(totalStaked, stakingToken.decimals)
-  }
-
-  const {
-    targetRef: totalStakedTargetRef,
-    tooltip: totalStakedTooltip,
-    tooltipVisible: totalStakedTooltipVisible,
-  } = useTooltip(t('Total amount of %symbol% staked in this pool', { symbol: stakingToken.symbol }), {
-    placement: 'bottom',
-  })
-
-  const manualTooltipText = t('You must harvest and compound your earnings from this pool manually.')
-  const autoTooltipText = t(
-    'Any funds you stake in this pool will be automagically harvested and restaked (compounded) for you.',
-  )
-
-  const {
-    targetRef: tagTargetRef,
-    tooltip: tagTooltip,
-    tooltipVisible: tagTooltipVisible,
-  } = useTooltip(vaultKey ? autoTooltipText : manualTooltipText, {
-    placement: 'bottom-start',
-  })
-
-  const maxStakeRow = stakingLimit.gt(0) ? (
-    <Flex mb="8px" justifyContent="space-between">
-      <Text>{t('Max. stake per user')}:</Text>
-      <Text>{`${getFullDisplayBalance(stakingLimit, stakingToken.decimals, 0)} ${stakingToken.symbol}`}</Text>
-    </Flex>
-  ) : null
-
-  const blocksRow =
-    blocksRemaining || blocksUntilStart ? (
-      <Flex mb="8px" justifyContent="space-between">
-        <Text>{hasPoolStarted ? t('Ends in') : t('Starts in')}:</Text>
-        <Flex>
-          <Link external href={getBscScanLink(hasPoolStarted ? endBlock : startBlock, 'countdown')}>
-            <Balance fontSize="16px" value={blocksToDisplay} decimals={0} color="primary" />
-            <Text ml="4px" color="primary" textTransform="lowercase">
-              {t('Blocks')}
-            </Text>
-            <TimerIcon ml="4px" color="primary" />
-          </Link>
-        </Flex>
-      </Flex>
-    ) : (
-      <Skeleton width="56px" height="16px" />
-    )
-
-  const aprRow = (
-    <Flex justifyContent="space-between" alignItems="center" mb="8px">
-      <Text>{vaultKey ? t('APY') : t('APR')}:</Text>
-      <Apr
-        pool={pool}
-        showIcon
-        stakedBalance={poolStakingTokenBalance}
-        performanceFee={vaultKey ? performanceFeeAsDecimal : 0}
-      />
-    </Flex>
-  )
-
-  const totalStakedRow = (
-    <Flex justifyContent="space-between" alignItems="center" mb="8px">
-      <Text maxWidth={['50px', '100%']}>{t('Total staked')}:</Text>
-      <Flex alignItems="center">
-        {totalStaked && totalStaked.gte(0) ? (
-          <>
-            <Balance fontSize="16px" value={getTotalStakedBalance()} decimals={0} unit={` ${stakingToken.symbol}`} />
-            <span ref={totalStakedTargetRef}>
-              <HelpIcon color="textSubtle" width="20px" ml="4px" />
-            </span>
-          </>
-        ) : (
-          <Skeleton width="56px" height="16px" />
-        )}
-        {totalStakedTooltipVisible && totalStakedTooltip}
-      </Flex>
-    </Flex>
-  )
-
   return (
     <StyledActionPanel expanded={expanded}>
       <InfoSection>
-        {maxStakeRow}
-        {(isXs || isSm) && aprRow}
-        {(isXs || isSm || isMd) && totalStakedRow}
-        {shouldShowBlockCountdown && blocksRow}
-        <Flex mb="24px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
-          <LinkExternal href={`/info/token/${earningToken.address}`}>{t('See Token Info')}</LinkExternal>
-        </Flex>
-        <Flex mb="24px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
-          <LinkExternal href={earningToken.projectLink}>{t('View Project Site')}</LinkExternal>
-        </Flex>
-        {poolContractAddress && (
-          <Flex mb="24px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
-            <LinkExternal
-              href={`${BASE_BSC_SCAN_URL}/address/${vaultKey ? vaultContractAddress : poolContractAddress}`}
-            >
-              {t('View Contract')}
-            </LinkExternal>
-          </Flex>
-        )}
-        {/* {account && isMetaMaskInScope && tokenAddress && (
-          <Flex mb="8px" justifyContent={['flex-end', 'flex-end', 'flex-start']}>
-            <Button
-              variant="text"
-              p="0"
-              height="auto"
-              onClick={() => registerToken(tokenAddress, earningToken.symbol, earningToken.decimals)}
-            >
-              <Text color="primary">{t('Add to Metamask')}</Text>
-              <MetamaskIcon ml="4px" />
-            </Button>
-          </Flex>
-        )} */}
-        {vaultKey ? <CompoundingPoolTag /> : <ManualPoolTag />}
-        {tagTooltipVisible && tagTooltip}
-        <span ref={tagTargetRef}>
-          <HelpIcon ml="4px" width="20px" height="20px" color="textSubtle" />
-        </span>
+        <DividendInfo />
+        {(isXs || isSm || isMd) && <APY account={account} />}
+        {(isXs || isSm || isMd) && <TotalPersonalStaking account={account} />}
+        {(isXs || isSm || isMd) && <IndividualProportion account={account} />}
+
+        {(isXs || isSm || isMd) && <TotalCommunityStaking account={account} />}
       </InfoSection>
       <ActionContainer>
-        {showSubtitle && (
-          <Text mt="4px" mb="16px" color="textSubtle">
-            {vaultKey
-              ? t(vaultPoolConfig[vaultKey].description)
-              : `${t('Earn')} CAKE ${t('Stake').toLocaleLowerCase()} CAKE`}
-          </Text>
-        )}
-        {pool.vaultKey ? (
-          <AutoHarvest {...pool} userDataLoaded={userDataLoaded} />
-        ) : (
-          <Harvest {...pool} userDataLoaded={userDataLoaded} />
-        )}
-        <Stake pool={pool} userDataLoaded={userDataLoaded} />
+        <Harvest />
+        <Stake />
       </ActionContainer>
     </StyledActionPanel>
   )

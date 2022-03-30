@@ -6,8 +6,6 @@ import { DeserializedPool } from 'state/types'
 import PoolRow from './PoolRow'
 
 interface PoolsTableProps {
-  pools: DeserializedPool[]
-  userDataLoaded: boolean
   account: string
 }
 
@@ -28,22 +26,13 @@ const StyledTableBorder = styled.div`
   background-size: 400% 400%;
 `
 
-const ScrollButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-`
-
-const PoolsTable: React.FC<PoolsTableProps> = ({ pools, userDataLoaded, account }) => {
+const PoolsTable: React.FC<PoolsTableProps> = ({ account }) => {
   const { t } = useTranslation()
   const tableWrapperEl = useRef<HTMLDivElement>(null)
   return (
     <StyledTableBorder>
       <StyledTable id="pools-table" role="table" ref={tableWrapperEl}>
-        {pools.map((pool) => (
-          <PoolRow key={pool.vaultKey ?? pool.sousId} pool={pool} account={account} userDataLoaded={userDataLoaded} />
-        ))}
+        <PoolRow account={account} />
       </StyledTable>
     </StyledTableBorder>
   )
