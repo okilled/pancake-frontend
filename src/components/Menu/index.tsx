@@ -1,16 +1,17 @@
-import React, { useMemo } from 'react'
+import PhishingWarningBanner from 'components/PhishingWarningBanner'
+import tokens from 'config/constants/tokens'
+import useTheme from 'hooks/useTheme'
+import React, { useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router'
 import { Menu as UikitMenu } from '@pancakeswap/uikit'
 import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
-import PhishingWarningBanner from 'components/PhishingWarningBanner'
-import useTheme from 'hooks/useTheme'
 import { usePhishingBannerManager } from 'state/user/hooks'
 import { usePair } from 'hooks/usePairs'
-import tokens from 'config/constants/tokens'
+
 import config from './config/config'
-import UserMenu from './UserMenu'
 import GlobalSettings from './GlobalSettings'
+import UserMenu from './UserMenu'
 import { getActiveMenuItem, getActiveSubMenuItem } from './utils'
 import { footerLinks } from './config/footerConfig'
 
@@ -22,10 +23,9 @@ const Menu = (props) => {
 
   const activeMenuItem = getActiveMenuItem({ menuConfig: config(t), pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
-
   const [, pair] = usePair(tokens.usdt, tokens.era)
   const eraPriceUsd = useMemo(() => {
-    return Number(pair?.reserve0.raw.toString()) / Number(pair?.reserve1.raw.toString())
+    return Number(pair?.reserve1.raw.toString()) / Number(pair?.reserve0.raw.toString())
   }, [pair])
 
   return (

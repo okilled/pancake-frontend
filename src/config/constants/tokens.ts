@@ -13,8 +13,16 @@ interface SerializedTokenList {
 }
 
 export const mainnetTokens = {
-  // todo 正式合约
-  era: new Token(MAINNET, '0xa3a9d092f40d2642b1dbaceb5df6b0c7940f9ab4', 18, 'ERA', 'ERA', 'https://www.ninance.io'),
+  'ERA(old)': new Token(
+    MAINNET,
+    '0xa3a9d092f40d2642b1dbaceb5df6b0c7940f9ab4',
+    18,
+    'ERA(old)',
+    'ERA(old)',
+    'https://www.ninance.io',
+  ),
+  era: new Token(MAINNET, '0x3f47D316b6Ca268C8a7916D6Ed02E90DbFEE3EE2', 18, 'ERA', 'ERA', 'https://www.ninance.io'),
+
   wbnb: new Token(
     MAINNET,
     '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
