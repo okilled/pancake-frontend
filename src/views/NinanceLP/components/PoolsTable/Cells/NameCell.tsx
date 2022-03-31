@@ -32,8 +32,7 @@ const NameCell: React.FC = () => {
         </Text>
         {!isMobile && (
           <Text fontSize="12px" color="textSubtle">
-            质押 ERA/USDT-LP 以获得代币奖励
-            {/* {t('Stake ERA/USDT-LP to get rewards')} */}
+            {t('Stake ERA/USDT-LP to get rewards')}
           </Text>
         )}
       </CellContent>

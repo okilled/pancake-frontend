@@ -33,10 +33,12 @@ const CountDown = ({ countDown, status }: { countDown: number; status: any }) =>
   return (
     <div>
       {status === STATUS.staking
-        ? t('Automatic renewal after %dateTime%', {
+        ? t('Redeemable after %dateTime%', {
             dateTime: `${hour}:${minute}:${second}s`,
           })
-        : `${hour}:${minute}:${second}s后自动续期`}
+        : t('Automatic renewal after %dateTime%', {
+            dateTime: `${hour}:${minute}:${second}s`,
+          })}
     </div>
   )
 }
@@ -46,7 +48,7 @@ const StakeList = () => {
   const { account } = useWeb3React()
 
   const ninanceFarmContract = useNinanceFarmContract()
-  const { slowRefresh } = useRefresh()
+  const { fastRefresh } = useRefresh()
   const { callWithGasPrice } = useCallWithGasPrice()
   const { toastSuccess, toastError } = useToast()
 
@@ -55,7 +57,7 @@ const StakeList = () => {
   const [loading, setLoading] = useState(true)
 
   const [open, close] = useModal(
-    <Modal title="1" headerBackground="gradients.cardHeader">
+    <Modal title={t('Pending Confirmation')} headerBackground="gradients.cardHeader">
       <ConfirmationPendingContent pendingText="" />
     </Modal>,
     false,
@@ -101,7 +103,7 @@ const StakeList = () => {
     }
 
     fetchList()
-  }, [account, ninanceFarmContract, slowRefresh])
+  }, [account, ninanceFarmContract, fastRefresh])
 
   const redeem = async (nonce: number) => {
     open()

@@ -1749,5 +1749,22 @@
   "Unwrap": "Розгорнути",
   "Go to IFO": "Перейти до IFO",
   "Phishing warning: ": "Попередження про фішинг: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "уважно перевірте, чи адреса, яку ви відвідуєте, -- це https://pancakeswap.finance."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "уважно перевірте, чи адреса, яку ви відвідуєте, -- це https://pancakeswap.finance.",
+
+  "Stake ERA/USDT-LP to get rewards": "Зробіть ставку ERA/USDT-LP, щоб отримати нагороди",
+  "Recent Ninance-LP profit": "Останній прибуток Ninance-LP",
+  "Individual Staking": "Індивідуальна ставка",
+  "Individual Ratio": "Індивідуальне співвідношення",
+  "Total Community Staking": "Повний стейкінг спільноти",
+  "Total Dividend Pool": "Загальний пул дивідендів",
+  "Claimable Assets": "Активи, що підлягають витребуванню",
+  "Total Claimed %symbol%": "Усього заявлено %symbol%",
+  "Personal Staking List": "Персональний список ставок",
+  "NINANCE-LP Balance": "NINANCE-LP Balance",
+  "Stake Quantity": "Кількість ставки",
+  "Profiting": "Прибуток",
+  "Redeem": "Викупити",
+  "Redeemed": "Викуплений",
+  "Automatic renewal after %dateTime%": "Автоматичне поновлення після %dateTime%",
+  "Redeemable after %dateTime%": "Можна активувати після %dateTime%"
 }

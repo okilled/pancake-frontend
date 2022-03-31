@@ -1749,5 +1749,22 @@
   "Unwrap": "உறையகற்று",
   "Go to IFO": "IFO-க்குச் செல்க",
   "Phishing warning: ": "பிஷிங் எச்சரிக்கை: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "இத்தளத்திற்குச் செல்வதை உறுதிசெய்துகொள்ளுங்கள்: https://pancakeswap.finance - URL-ஐ கவனமாகச் சரிபாருங்கள்."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "இத்தளத்திற்குச் செல்வதை உறுதிசெய்துகொள்ளுங்கள்: https://pancakeswap.finance - URL-ஐ கவனமாகச் சரிபாருங்கள்.",
+
+  "Stake ERA/USDT-LP to get rewards": "பங்கு ஈரா/யுஎஸ்டிடி-எல்பி வெகுமதிகளைப் பெற",
+  "Recent Ninance-LP profit": "சமீபத்திய நினான்ஸ்-எல்பி லாபம்",
+  "Individual Staking": "தனிப்பட்ட ஸ்டேக்கிங்",
+  "Individual Ratio": "தனிநபர் விகிதம்",
+  "Total Community Staking": "மொத்த சமூக ஸ்டேக்கிங்",
+  "Total Dividend Pool": "மொத்த டிவிடெண்ட் பூல்",
+  "Claimable Assets": "உரிமை கோரக்கூடிய சொத்துக்கள்",
+  "Total Claimed %symbol%": "மொத்தம் கோரப்பட்ட %symbol%",
+  "Personal Staking List": "தனிப்பட்ட பங்கு பட்டியல்",
+  "NINANCE-LP Balance": "NINANCE-LP இருப்பு",
+  "Stake Quantity": "பங்கு அளவு",
+  "Profiting": "லாபம்",
+  "Redeem": "மீட்பு",
+  "Redeemed": "மீட்கப்பட்டது",
+  "Automatic renewal after %dateTime%": "%dateTime%க்குப் பிறகு தானியங்கி புதுப்பித்தல்",
+  "Redeemable after %dateTime%": "%dateTime%க்குப் பிறகு மீட்டெடுக்கலாம்"
 }

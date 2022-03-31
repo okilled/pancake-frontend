@@ -30,7 +30,7 @@ const Staked = () => {
   const [, pair] = usePair(tokens.usdt, tokens.era)
   const userPoolBalance = useTokenBalance(account ?? undefined, pair?.liquidityToken)
   const erc20 = useERC20(NINANCE_ERA_USDT_PAIR)
-  const { fastRefresh } = useRefresh()
+  // const { fastRefresh } = useRefresh()
 
   const [stakeQuantity, setStakeQuantity] = useState(25)
   const [hasApprove, setHasApprove] = useState(false)
@@ -44,7 +44,7 @@ const Staked = () => {
   }, [userPoolBalance])
 
   const [open, close] = useModal(
-    <Modal title="1" headerBackground="gradients.cardHeader">
+    <Modal title={t('Pending Confirmation')} headerBackground="gradients.cardHeader">
       <ConfirmationPendingContent pendingText="" />
     </Modal>,
     false,

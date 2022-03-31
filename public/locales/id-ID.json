@@ -1749,5 +1749,22 @@
   "Unwrap": "Buka Bungkus",
   "Go to IFO": "Go to IFO",
   "Phishing warning: ": "Phishing warning: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.",
+
+  "Stake ERA/USDT-LP to get rewards": "Stake ERA/USDT-LP untuk mendapatkan hadiah",
+  "Recent Ninance-LP profit": "Keuntungan Ninance-LP Terbaru",
+  "Individual Staking": "Mempertaruhkan Individu",
+  "Individual Ratio": "Rasio Individu",
+  "Total Community Staking": "Total Pertaruhan Komunitas",
+  "Total Dividend Pool": "Total Dividen Pool",
+  "Claimable Assets": "Aset yang Dapat Diklaim",
+  "Total Claimed %symbol%": "Total Diklaim %simbol%",
+  "Personal Staking List": "Daftar Taruhan Pribadi",
+  "NINANCE-LP Balance": "Saldo NINANCE-LP",
+  "Stake Quantity": "Jumlah Taruhan",
+  "Profiting": "Menguntungkan",
+  "Redeem": "Menukarkan",
+  "Redeemed": "Ditebus",
+  "Automatic renewal after %dateTime%": "Perpanjangan otomatis setelah %dateTime%",
+  "Redeemable after %dateTime%": "Dapat ditukarkan setelah %dateTime%"
 }

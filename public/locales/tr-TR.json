@@ -1749,5 +1749,22 @@
   "Unwrap": "Paketten Çıkar",
   "Go to IFO": "IFO'ya git",
   "Phishing warning: ": "Kimlik avı uyarısı: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance adresini ziyaret ettiğinizden emin olun; URL'yi dikkatli bir şekilde kontrol edin."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance adresini ziyaret ettiğinizden emin olun; URL'yi dikkatli bir şekilde kontrol edin.",
+
+  "Stake ERA/USDT-LP to get rewards": "Ödül almak için ERA/USDT-LP'ye yatırım yapın",
+  "Recent Ninance-LP profit": "Son Ninance-LP karı",
+  "Individual Staking": "Bireysel Staking",
+  "Individual Ratio": "Bireysel Oran",
+  "Total Community Staking": "Toplam Topluluk Staking",
+  "Total Dividend Pool": "Toplam Temettü Havuzu",
+  "Claimable Assets": "Talep Edilebilir Varlıklar",
+  "Total Claimed %symbol%": "Talep Edilen Toplam %symbol%",
+  "Personal Staking List": "Kişisel Staking Listesi",
+  "NINANCE-LP Balance": "NINANCE-LP Dengesi",
+  "Stake Quantity": "Bahis Miktarı",
+  "Profiting": "Kazanç",
+  "Redeem": "Tazmin etmek",
+  "Redeemed": "Kurtarıldı",
+  "Automatic renewal after %dateTime%": "%dateTime% sonra otomatik yenileme",
+  "Redeemable after %dateTime%": "%dateTime% tarihinden sonra kullanılabilir"
 }

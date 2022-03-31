@@ -1749,5 +1749,22 @@
   "Unwrap": "Uitpakken",
   "Go to IFO": "Naar IFO",
   "Phishing warning: ": "Phishingwaarschuwing: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "zorg dat je https://pancakeswap.finance bezoekt - controleer de URL zorgvuldig."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "zorg dat je https://pancakeswap.finance bezoekt - controleer de URL zorgvuldig.",
+
+  "Stake ERA/USDT-LP to get rewards": "Sta ERA/USDT-LP in om beloningen te krijgen",
+  "Recent Ninance-LP profit": "Recente Ninance-LP winst",
+  "Individual Staking": "Individuele inzet",
+  "Individual Ratio": "Individuele verhouding",
+  "Total Community Staking": "Totale inzet van de gemeenschap",
+  "Total Dividend Pool": "Totale dividendpoel",
+  "Claimable Assets": "Vorderbare activa",
+  "Total Claimed %symbol%": "Totaal geclaimd %symbol%",
+  "Personal Staking List": "Persoonlijke inzetlijst",
+  "NINANCE-LP Balance": "NINANCE-LP Balans",
+  "Stake Quantity": "Inzet Hoeveelheid",
+  "Profiting": "Winstgevend",
+  "Redeem": "Inwisselen",
+  "Redeemed": "Ingewisseld",
+  "Automatic renewal after %dateTime%": "Automatische verlenging na %dateTime%",
+  "Redeemable after %dateTime%": "Inwisselbaar na %dateTime%"
 }

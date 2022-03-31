@@ -25,7 +25,7 @@ const TotalPersonalStaking: React.FC<ICellTotalPersonalStaking> = ({ account }) 
     fetchPersonalStaking()
   }, [fastRefresh, ninanceFarmContract, account])
 
-  return <Cell title={t('Total Personal Staking')} value={personalStaking} loading={false} account={account} />
+  return <Cell title={t('Individual Staking')} value={personalStaking} loading={false} account={account} />
 }
 
 export default TotalPersonalStaking

@@ -1749,5 +1749,22 @@
   "Unwrap": "Despachetează",
   "Go to IFO": "Accesează IFO",
   "Phishing warning: ": "Avertizare de phishing: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "asigură-te că vizitezi https://pancakeswap.finance - verifică URL-ul cu atenție."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "asigură-te că vizitezi https://pancakeswap.finance - verifică URL-ul cu atenție.",
+
+  "Stake ERA/USDT-LP to get rewards": "Mizați ERA/USDT-LP pentru a obține recompense",
+  "Recent Ninance-LP profit": "Profit recent Ninance-LP",
+  "Individual Staking": "Miza individuală",
+  "Individual Ratio": "Raportul individual",
+  "Total Community Staking": "Miza totală a comunității",
+  "Total Dividend Pool": "Fondul total de dividende",
+  "Claimable Assets": "Active revendicabile",
+  "Total Claimed %symbol%": "Total revendicat %symbol%",
+  "Personal Staking List": "Lista de miză personală",
+  "NINANCE-LP Balance": "Soldul NINANCE-LP",
+  "Stake Quantity": "Cantitatea mizei",
+  "Profiting": "Profit",
+  "Redeem": "Răscumpăra",
+  "Redeemed": "Răscumpărat",
+  "Automatic renewal after %dateTime%": "Reînnoire automată după %dateTime%",
+  "Redeemable after %dateTime%": "Rambursabil după %dateTime%"
 }

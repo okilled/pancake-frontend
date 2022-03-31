@@ -1749,5 +1749,22 @@
   "Unwrap": "Mở bọc",
   "Go to IFO": "Chuyển đến IFO",
   "Phishing warning: ": "Cảnh báo lừa đảo: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "vui lòng đảm bảo bạn đang truy cập https://pancakeswap.finance - hãy kiểm tra thật kỹ URL."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "vui lòng đảm bảo bạn đang truy cập https://pancakeswap.finance - hãy kiểm tra thật kỹ URL.",
+
+  "Stake ERA/USDT-LP to get rewards": "Đặt cọc ERA / USDT-LP để nhận phần thưởng",
+  "Recent Ninance-LP profit": "Lợi nhuận Ninance-LP gần đây",
+  "Individual Staking": "Cá nhân đặt cược",
+  "Individual Ratio": "Tỷ lệ Cá nhân",
+  "Total Community Staking": "Tổng cộng sự quan tâm của cộng đồng",
+  "Total Dividend Pool": "Tổng cổ tức",
+  "Claimable Assets": "Tài sản có thể xác nhận quyền sở hữu",
+  "Total Claimed %symbol%": "Tổng số đã xác nhận%symbol%",
+  "Personal Staking List": "Danh sách cá nhân",
+  "NINANCE-LP Balance": "Số dư NINANCE-LP",
+  "Stake Quantity": "Số lượng cổ phần",
+  "Profiting": "Thu lợi",
+  "Redeem": "Chuộc lại",
+  "Redeemed": "Đã đổi",
+  "Automatic renewal after %dateTime%": "Gia hạn tự động sau%dateTime%",
+  "Redeemable after %dateTime%": "Có thể đổi sau%dateTime%"
 }

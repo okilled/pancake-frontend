@@ -4,6 +4,7 @@ import Balance from 'components/Balance'
 import React from 'react'
 import styled from 'styled-components'
 import { Box, Text, useMatchBreakpoints } from '@pancakeswap/uikit'
+import { useTranslation } from 'contexts/Localization'
 
 import BaseCell, { CellContent } from './BaseCell'
 
@@ -19,6 +20,7 @@ const StyledCell = styled(BaseCell)`
 
 const Profit: React.FC<ProfitProps> = ({ account }) => {
   const baseUrl = process.env.REACT_APP_NINANCE_BASEURL
+  const { t } = useTranslation()
 
   const { isMobile } = useMatchBreakpoints()
 
@@ -34,7 +36,7 @@ const Profit: React.FC<ProfitProps> = ({ account }) => {
       <StyledCell role="cell">
         <CellContent>
           <Text fontSize="12px" color="textSubtle" textAlign="left">
-            最近的 ERA/USDT-LP 利润
+            {t('Recent Ninance-LP profit')}
           </Text>
           <Box mr="8px" height="32px">
             <Balance
@@ -56,7 +58,7 @@ const Profit: React.FC<ProfitProps> = ({ account }) => {
     <StyledCell role="cell">
       <CellContent>
         <Text fontSize="12px" color="textSubtle" textAlign="left">
-          最近的 ERA/USDT-LP 利润
+          {t('Recent Ninance-LP profit')}
         </Text>
         <Box mr="8px" height="32px">
           <Balance

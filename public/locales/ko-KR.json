@@ -1749,5 +1749,22 @@
   "Unwrap": "언래핑",
   "Go to IFO": "IFO로 이동",
   "Phishing warning: ": "피싱 경고: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance를 방문하고 있는지 확인하세요. 주의하여 URL을 확인하세요."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance를 방문하고 있는지 확인하세요. 주의하여 URL을 확인하세요.",
+
+  "Stake ERA/USDT-LP to get rewards": "ERA/USDT-LP를 스테이킹하여 보상을 받으세요",
+  "Recent Ninance-LP profit": "최근 나이낸스-LP 수익",
+  "Individual Staking": "개인 스테이킹",
+  "Individual Ratio": "개인 비율",
+  "Total Community Staking": "토털 커뮤니티 스테이킹",
+  "Total Dividend Pool": "총 배당금 풀",
+  "Claimable Assets": "청구 가능한 자산",
+  "Total Claimed %symbol%": "청구된 총 %symbol%",
+  "Personal Staking List": "개인 스테이킹 목록",
+  "NINANCE-LP Balance": "NINANCE-LP 밸런스",
+  "Stake Quantity": "지분 수량",
+  "Profiting": "이익",
+  "Redeem": "상환하다",
+  "Redeemed": "구함",
+  "Automatic renewal after %dateTime%": "%dateTime% 이후 자동 갱신",
+  "Redeemable after %dateTime%": "%dateTime% 이후에 상환 가능"
 }

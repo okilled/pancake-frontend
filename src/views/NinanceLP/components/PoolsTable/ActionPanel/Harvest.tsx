@@ -62,7 +62,7 @@ const HarvestAction = () => {
   )
 
   const [open, close] = useModal(
-    <Modal title="1" headerBackground="gradients.cardHeader">
+    <Modal title={t('Pending Confirmation')} headerBackground="gradients.cardHeader">
       <ConfirmationPendingContent pendingText="" />
     </Modal>,
     false,
@@ -143,7 +143,7 @@ const HarvestAction = () => {
               style={{ width: 24, height: 24, marginRight: 8, marginLeft: -5 }}
             />
 
-            <ActionTitle>{t('Available ERA')}</ActionTitle>
+            <ActionTitle>{t('Claimable Assets')}</ActionTitle>
           </Flex>
           <Button scale="sm" type="button" variant="secondary" style={{ fontSize: '14px' }} onClick={claim}>
             {t('Claim')}
@@ -169,7 +169,7 @@ const HarvestAction = () => {
         <ListPanel
           loading={loading}
           dataSource={listlData ?? []}
-          title={`总领取 ${priceSymbol === SYMBOL.USDT ? 'USDT' : 'ERA'} 数量`}
+          title={t('Total Claimed %symbol%', { symbol: priceSymbol === SYMBOL.USDT ? 'USDT' : 'ERA' })}
           value={totalData ?? 0}
           unit={priceSymbol === SYMBOL.USDT ? 'USDT' : 'ERA'}
           RenderTitleRight={

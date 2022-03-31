@@ -1749,5 +1749,22 @@
   "Unwrap": "I-Unwrap",
   "Go to IFO": "Pumunta sa IFO",
   "Phishing warning: ": "Babala sa phishing: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "tiyaking bumibisita ka sa https://pancakeswap.finance - suriing mabuti ang URL."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "tiyaking bumibisita ka sa https://pancakeswap.finance - suriing mabuti ang URL.",
+
+  "Stake ERA/USDT-LP to get rewards": "Stake ERA/USDT-LP para makakuha ng mga reward",
+  "Recent Ninance-LP profit": "Kamakailang kita ng Ninance-LP",
+  "Individual Staking": "Indibidwal na Staking",
+  "Individual Ratio": "Indibidwal na Ratio",
+  "Total Community Staking": "Kabuuang Staking ng Komunidad",
+  "Total Dividend Pool": "Kabuuang Dividend Pool",
+  "Claimable Assets": "Mga Maaangkin na Asset",
+  "Total Claimed %symbol%": "Kabuuang Na-claim %symbol%",
+  "Personal Staking List": "Listahan ng Personal na Staking",
+  "NINANCE-LP Balance": "NINANCE-LP Balance",
+  "Stake Quantity": "Dami ng Stake",
+  "Profiting": "Kumita",
+  "Redeem": "Tubusin",
+  "Redeemed": "Natubos",
+  "Automatic renewal after %dateTime%": "Awtomatikong pag-renew pagkatapos ng %dateTime%",
+  "Redeemable after %dateTime%": "Mare-redeem pagkatapos ng %dateTime%"
 }

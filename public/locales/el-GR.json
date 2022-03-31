@@ -1749,5 +1749,22 @@
   "Unwrap": "Ξετύλιγμα",
   "Go to IFO": "Μετάβαση στην IFO",
   "Phishing warning: ": "Προειδοποίηση ηλεκτρονικού ψαρέματος: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "βεβαιωθείτε ότι επισκέπτεστε τη διεύθυνση https://pancakeswap.finance - ελέγξτε προσεκτικά τη διεύθυνση URL."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "βεβαιωθείτε ότι επισκέπτεστε τη διεύθυνση https://pancakeswap.finance - ελέγξτε προσεκτικά τη διεύθυνση URL.",
+
+  "Stake ERA/USDT-LP to get rewards": "Stake ERA/USDT-LP για να λάβετε ανταμοιβές",
+  "Recent Ninance-LP profit": "Πρόσφατα κέρδη Ninance-LP",
+  "Individual Staking": "Ατομικό Ποντάρισμα",
+  "Individual Ratio": "Ατομική αναλογία",
+  "Total Community Staking": "Συνολικό Κοινοτικό Ποντάρισμα",
+  "Total Dividend Pool": "Σύνολο μερισμάτων",
+  "Claimable Assets": "Απαιτούμενα περιουσιακά στοιχεία",
+  "Total Claimed %symbol%": "Συνολική αξίωση %symbol%",
+  "Personal Staking List": "Προσωπική λίστα πονταρίσματος",
+  "NINANCE-LP Balance": "Υπόλοιπο NINANCE-LP",
+  "Stake Quantity": "Ποσότητα στοιχήματος",
+  "Profiting": "Κέρδος",
+  "Redeem": "Εξαργυρώνω",
+  "Redeemed": "Λυτρώθηκε",
+  "Automatic renewal after %dateTime%": "Αυτόματη ανανέωση μετά την %dateTime%",
+  "Redeemable after %dateTime%": "Δυνατότητα εξαργύρωσης μετά την %dateTime%"
 }

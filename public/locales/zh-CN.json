@@ -1749,5 +1749,22 @@
   "Unwrap": "解包",
   "Go to IFO": "转到 IFO",
   "Phishing warning: ": "钓鱼警告：",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "请确保您访问的是 https://pancakeswap.finance - 请仔细检查网址。"
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "请确保您访问的是 https://pancakeswap.finance - 请仔细检查网址。",
+
+  "Stake ERA/USDT-LP to get rewards": "质押 ERA/USDT-LP 以获得代币奖励",
+  "Recent Ninance-LP profit": "最近的 ERA/USDT-LP 利润",
+  "Individual Staking": "个人质押",
+  "Individual Ratio": "个人占比",
+  "Total Community Staking": "全网质押总计",
+  "Total Dividend Pool": "总分红池",
+  "Claimable Assets": "可领取资产",
+  "Total Claimed %symbol%": "总领取 %symbol% 数量",
+  "Personal Staking List": "个人质押列表",
+  "NINANCE-LP Balance": "NINANCE-LP 余额",
+  "Stake Quantity": "质押数量",
+  "Profiting": "产生收益中",
+  "Redeem": "赎回",
+  "Redeemed": "已赎回",
+  "Automatic renewal after %dateTime%": "%dateTime% 后自动续期",
+  "Redeemable after %dateTime%": "%dateTime% 后可赎回"
 }

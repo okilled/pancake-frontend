@@ -39,7 +39,7 @@ const DividendInfo = () => {
             <Flex alignItems="center">
               <img src="/images/lp-title-icon.png" alt="DividendInfoTitle" width="19px" height="auto" />
               <Text fontSize="12px" bold color="textSubtle" as="span" ml="2px">
-                总分红池
+                {t('Total Dividend Pool')}
               </Text>
             </Flex>
           </ActionTitles>

@@ -1749,5 +1749,22 @@
   "Unwrap": "ラップ解除",
   "Go to IFO": "IFOに移動",
   "Phishing warning: ": "フィッシング警告: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance にアクセスしていることを必ずご確認ください。URL をよくご確認ください。"
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "https://pancakeswap.finance にアクセスしていることを必ずご確認ください。URL をよくご確認ください。",
+
+  "Stake ERA/USDT-LP to get rewards": "報酬を得るためにERA/USDT-LPを賭けてください",
+  "Recent Ninance-LP profit": "最近のNinance-LP利益",
+  "Individual Staking": "個人ステーキング",
+  "Individual Ratio": "個人比率",
+  "Total Community Staking": "トータルコミュニティステーキング",
+  "Total Dividend Pool": "総配当プール",
+  "Claimable Assets": "請求可能な資産",
+  "Total Claimed %symbol%": "合計請求%symbol%",
+  "Personal Staking List": "パーソナルステーキングリスト",
+  "NINANCE-LP Balance": "NINANCE-LPバランス",
+  "Stake Quantity": "ステーク数量",
+  "Profiting": "儲かる",
+  "Redeem": "償還",
+  "Redeemed": "償還",
+  "Automatic renewal after %dateTime%": "%dateTime%後の自動更新",
+  "Redeemable after %dateTime%": "%dateTime%の後に償還可能"
 }

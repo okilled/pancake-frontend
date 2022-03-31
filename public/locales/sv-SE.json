@@ -1749,5 +1749,22 @@
   "Unwrap": "Unwrap",
   "Go to IFO": "Go to IFO",
   "Phishing warning: ": "Phishing warning: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.",
+
+  "Stake ERA/USDT-LP to get rewards": "Satsa ERA/USDT-LP för att få belöningar",
+  "Recent Ninance-LP profit": "Senaste Ninance-LP vinst",
+  "Individual Staking": "Individuell insats",
+  "Individual Ratio": "Individuellt förhållande",
+  "Total Community Staking": "Total gemenskapsinsats",
+  "Total Dividend Pool": "Total utdelningspool",
+  "Claimable Assets": "Fortsättningsbara tillgångar",
+  "Total Claimed %symbol%": "Totalt gjort anspråk på %symbol%",
+  "Personal Staking List": "Personlig insatslista",
+  "NINANCE-LP Balance": "NINANCE-LP Balans",
+  "Stake Quantity": "Insatskvantitet",
+  "Profiting": "Profitera",
+  "Redeem": "Lösa in",
+  "Redeemed": "Förlöst",
+  "Automatic renewal after %dateTime%": "Automatisk förnyelse efter %dateTime%",
+  "Redeemable after %dateTime%": "Lös in efter %dateTime%"
 }

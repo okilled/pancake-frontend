@@ -1749,5 +1749,22 @@
   "Unwrap": "উন্মুক্ত করুন",
   "Go to IFO": "Go to IFO",
   "Phishing warning: ": "Phishing warning: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.",
+
+  "Stake ERA/USDT-LP to get rewards": "পুরস্কার পেতে ERA/USDT-LP স্টক করুন",
+  "Recent Ninance-LP profit": "সাম্প্রতিক নিনান্স-এলপি লাভ",
+  "Individual Staking": "ব্যক্তিগত স্টকিং",
+  "Individual Ratio": "ব্যক্তিগত অনুপাত",
+  "Total Community Staking": "টোটাল কমিউনিটি স্টেকিং",
+  "Total Dividend Pool": "মোট লভ্যাংশ পুল",
+  "Claimable Assets": "দাবিযোগ্য সম্পদ",
+  "Total Claimed %symbol%": "মোট দাবিকৃত %symbol%",
+  "Personal Staking List": "ব্যক্তিগত স্টেকিং তালিকা",
+  "NINANCE-LP Balance": "NINANCE-LP ব্যালেন্স",
+  "Stake Quantity": "স্টেকের পরিমাণ",
+  "Profiting": "লাভ করা",
+  "Redeem": "খালান",
+  "Redeemed": "খালাস",
+  "Automatic renewal after %dateTime%": "%dateTime% এর পরে স্বয়ংক্রিয় পুনর্নবীকরণ",
+  "Redeemable after %dateTime%": "%dateTime% এর পরে খালাসযোগ্য"
 }

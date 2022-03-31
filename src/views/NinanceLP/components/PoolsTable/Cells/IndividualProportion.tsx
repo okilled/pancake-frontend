@@ -32,7 +32,7 @@ const IndividualProportion: React.FC<IIndividualProportion> = ({ account }) => {
     fetchPersonalStaking()
   }, [fastRefresh, ninanceFarmContract, account, ninanceLPContract])
 
-  return <Cell title="个人占比" value={proportion} loading={false} account={account} unit="%" />
+  return <Cell title={t('Individual Ratio')} value={proportion} loading={false} account={account} unit="%" />
 }
 
 export default IndividualProportion

@@ -1749,5 +1749,22 @@
   "Unwrap": "Avaa paketointi",
   "Go to IFO": "Siirry IFOon",
   "Phishing warning: ": "Tietojenkalasteluvaroitus: ",
-  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "varmista vierailevasi osoitteessa https://pancakeswap.finance – tarkista URL huolellisesti."
+  "please make sure you're visiting https://pancakeswap.finance - check the URL carefully.": "varmista vierailevasi osoitteessa https://pancakeswap.finance – tarkista URL huolellisesti.",
+
+  "Stake ERA/USDT-LP to get rewards": "Stake ERA/USDT-LP saadaksesi palkintoja",
+  "Recent Ninance-LP profit": "Ninance-LP:n viimeaikainen voitto",
+  "Individual Staking": "Yksittäinen panostus",
+  "Individual Ratio": "Yksittäinen suhde",
+  "Total Community Staking": "Yhteisön kokonaispanos",
+  "Total Dividend Pool": "Total Dividend Pool",
+  "Claimable Assets": "Vaadittavat varat",
+  "Total Claimed %symbol%": "Vaadittu yhteensä %symbol%",
+  "Personal Staking List": "Henkilökohtainen panosluettelo",
+  "NINANCE-LP Balance": "NINANCE-LP Balance",
+  "Stake Quantity": "Panoksen määrä",
+  "Profiting": "tuottoa",
+  "Redeem": "Lunastaa",
+  "Redeemed": "lunastettu",
+  "Automatic renewal after %dateTime%": "Automaattinen uusiminen %dateTime% jälkeen",
+  "Redeemable after %dateTime%": "Lunastettavissa %dateTime% jälkeen"
 }
