@@ -1,10 +1,11 @@
+import tokens from 'config/constants/tokens'
 import useRefresh from 'hooks/useRefresh'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'contexts/Localization'
 import { formatBigNumberToFixed } from 'utils/formatBalance'
 import { useNinanceFarmContract, useNinanceLPContract } from 'hooks/useContract'
-import { NINANCE_ERA_USDT_PAIR } from 'config/constants'
 import { getNinanceFramAddress } from 'utils/addressHelpers'
+import { Pair } from '@pancakeswap/sdk'
 
 import Cell from './Cell'
 
@@ -17,7 +18,7 @@ const IndividualProportion: React.FC<IIndividualProportion> = ({ account }) => {
   const [proportion, setProportion] = useState(0)
 
   const ninanceFarmContract = useNinanceFarmContract()
-  const ninanceLPContract = useNinanceLPContract(NINANCE_ERA_USDT_PAIR)
+  const ninanceLPContract = useNinanceLPContract(Pair.getAddress(tokens.usdt, tokens.era))
 
   const { fastRefresh } = useRefresh()
 

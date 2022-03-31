@@ -44,7 +44,7 @@ const Profit: React.FC<ProfitProps> = ({ account }) => {
               bold={!isMobile}
               fontSize={isMobile ? '14px' : '16px'}
               color="textDisabled"
-              decimals={1}
+              decimals={6}
               value={0}
               unit="USDT"
             />
@@ -66,7 +66,7 @@ const Profit: React.FC<ProfitProps> = ({ account }) => {
             bold={!isMobile}
             fontSize={isMobile ? '14px' : '16px'}
             color="textDisabled"
-            decimals={1}
+            decimals={6}
             value={totalData ?? 0}
             unit="USDT"
           />

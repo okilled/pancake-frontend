@@ -10,12 +10,10 @@ import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { ethers } from 'ethers'
 import { useTranslation } from 'contexts/Localization'
 import { getNinanceFramAddress } from 'utils/addressHelpers'
-import { useERC20, useNinanceFarmContract } from 'hooks/useContract'
-import { useTokenBalance } from 'state/wallet/hooks'
-import { usePair } from 'hooks/usePairs'
-import { NINANCE_ERA_USDT_PAIR } from 'config/constants'
+import { useERC20, useNinanceFarmContract, useNinanceLPContract } from 'hooks/useContract'
 import { ConfirmationPendingContent } from 'components/TransactionConfirmationModal'
 import { formatBigNumberToFixed } from 'utils/formatBalance'
+import { Pair } from '@pancakeswap/sdk'
 
 import ActionTitle from './ActionTitle'
 import StakeList from './StakeList'
@@ -27,21 +25,34 @@ const Staked = () => {
   const ninanceFarmContract = useNinanceFarmContract()
   const { callWithGasPrice } = useCallWithGasPrice()
   const { toastSuccess, toastError } = useToast()
-  const [, pair] = usePair(tokens.usdt, tokens.era)
-  const userPoolBalance = useTokenBalance(account ?? undefined, pair?.liquidityToken)
-  const erc20 = useERC20(NINANCE_ERA_USDT_PAIR)
+  const pairAdddress = useMemo(() => Pair.getAddress(tokens.usdt, tokens.era), [])
+  const ninanceLPContract = useNinanceLPContract(pairAdddress)
+  const erc20 = useERC20(pairAdddress)
   // const { fastRefresh } = useRefresh()
-
   const [stakeQuantity, setStakeQuantity] = useState(25)
   const [hasApprove, setHasApprove] = useState(false)
 
-  const poolBalance = useMemo(() => {
-    return ethers.utils.parseEther(userPoolBalance?.toExact() ?? '0')
-  }, [userPoolBalance])
+  const usePoolBalance = () => {
+    const { fastRefresh } = useRefresh()
+    const [balance, setBalance] = useState<ethers.BigNumber>(ethers.BigNumber.from(0))
+
+    useEffect(() => {
+      const getPoolBalance = async () => {
+        const result = await ninanceLPContract.balanceOf(account)
+        setBalance(result)
+      }
+
+      getPoolBalance()
+    }, [fastRefresh])
+
+    return balance
+  }
+
+  const poolBalance = usePoolBalance()
 
   const displayPoolBalanceNum = useMemo(() => {
-    return Number(userPoolBalance?.toFixed(5))
-  }, [userPoolBalance])
+    return +formatBigNumberToFixed(poolBalance)
+  }, [poolBalance])
 
   const [open, close] = useModal(
     <Modal title={t('Pending Confirmation')} headerBackground="gradients.cardHeader">
@@ -142,6 +153,7 @@ const Staked = () => {
                 scale="xs"
                 onClick={() => {
                   setStakeQuantity(25)
+                  setHasApprove(false)
                 }}
                 variant={stakeQuantity === 25 ? 'primary' : 'tertiary'}
               >
@@ -152,6 +164,7 @@ const Staked = () => {
                 scale="xs"
                 onClick={() => {
                   setStakeQuantity(50)
+                  setHasApprove(false)
                 }}
                 variant={stakeQuantity === 50 ? 'primary' : 'tertiary'}
               >
@@ -162,6 +175,7 @@ const Staked = () => {
                 scale="xs"
                 onClick={() => {
                   setStakeQuantity(75)
+                  setHasApprove(false)
                 }}
                 variant={stakeQuantity === 75 ? 'primary' : 'tertiary'}
               >
@@ -172,6 +186,7 @@ const Staked = () => {
                 scale="xs"
                 onClick={() => {
                   setStakeQuantity(-1)
+                  setHasApprove(false)
                 }}
                 variant={stakeQuantity === -1 ? 'primary' : 'tertiary'}
               >
