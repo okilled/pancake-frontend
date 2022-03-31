@@ -27,7 +27,7 @@ const IndividualProportion: React.FC<IIndividualProportion> = ({ account }) => {
       const person = await ninanceFarmContract.userInfo('0', account)
       const all = await ninanceLPContract.balanceOf(getNinanceFramAddress())
 
-      setProportion(+formatBigNumberToFixed(person?.[0]) / +formatBigNumberToFixed(all))
+      setProportion((+formatBigNumberToFixed(person?.[0]) / +formatBigNumberToFixed(all)) * 100)
     }
 
     fetchPersonalStaking()

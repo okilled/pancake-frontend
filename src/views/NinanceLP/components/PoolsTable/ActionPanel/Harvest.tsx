@@ -71,9 +71,9 @@ const HarvestAction = () => {
 
   useEffect(() => {
     const fetchPending = async () => {
-      const res = await ninanceFarmContract.pendingNINANCE('0', account)
-      setPendingEra(+formatBigNumberToFixed(res?.[0]))
-      setPendingU(+formatBigNumberToFixed(res?.[1]))
+      const res = await ninanceFarmContract.pendingReward('0', account)
+      // setPendingEra(+formatBigNumberToFixed(res))
+      setPendingU(+formatBigNumberToFixed(res))
     }
 
     if (account) {
@@ -85,35 +85,28 @@ const HarvestAction = () => {
     return (
       <Flex flexDirection="column" flex={1}>
         <ActionContainer>
-          <ActionTitle>{t('Available ERA')}</ActionTitle>
-          <ActionContent>
-            <Heading>0</Heading>
-          </ActionContent>
-          <Divider />
-          <ActionTitle>可领取 USDT 数量</ActionTitle>
-          <ActionContent>
-            <Heading>0</Heading>
-          </ActionContent>
-        </ActionContainer>
-        <ActionContainer style={{ marginTop: '16px' }}>
-          <ActionTitle>总领取 ERA 数量</ActionTitle>
-          <ActionContent>
-            <Heading>0</Heading>
-          </ActionContent>
+          <Flex justifyContent="space-between">
+            <Flex alignItems="center" flex={1}>
+              <img
+                alt="USDT"
+                src="/images/lp-token2.svg"
+                style={{ width: 24, height: 24, marginRight: 8, marginLeft: -5 }}
+              />
+              <ActionTitle>{t('Claimable Assets')}</ActionTitle>
+            </Flex>
+          </Flex>
+
+          <Flex alignItems="flex-end">
+            <Flex pt="18px" flexDirection="column" flex={1}>
+              <Text fontSize="12px" bold color="textSubtle">
+                USDT
+              </Text>
+              <Heading>0</Heading>
+            </Flex>
+          </Flex>
         </ActionContainer>
       </Flex>
     )
-  }
-
-  const refreshHttp = async () => {
-    setLoading(true)
-
-    try {
-      await refreshTotalData()
-      await refreshListData()
-    } finally {
-      setLoading(false)
-    }
   }
 
   const claim = async () => {
@@ -136,33 +129,25 @@ const HarvestAction = () => {
       <ActionContainer>
         <Flex justifyContent="space-between">
           <Flex alignItems="center" flex={1}>
-            <img alt="ERA" src="/images/lp-token1.svg" style={{ width: 24, height: 24 }} />
             <img
               alt="USDT"
               src="/images/lp-token2.svg"
               style={{ width: 24, height: 24, marginRight: 8, marginLeft: -5 }}
             />
-
             <ActionTitle>{t('Claimable Assets')}</ActionTitle>
           </Flex>
-          <Button scale="sm" type="button" variant="secondary" style={{ fontSize: '14px' }} onClick={claim}>
-            {t('Claim')}
-          </Button>
         </Flex>
 
-        <Flex>
-          <Flex pt="18px" flexDirection="column" flex={1}>
-            <Text fontSize="12px" bold color="textSubtle">
-              ERA
-            </Text>
-            <Balance lineHeight="1" color="#F5B420" bold fontSize="20px" decimals={5} value={pendingEra} />
-          </Flex>
+        <Flex alignItems="flex-end">
           <Flex pt="18px" flexDirection="column" flex={1}>
             <Text fontSize="12px" bold color="textSubtle">
               USDT
             </Text>
             <Balance lineHeight="1" color="#F5B420" bold fontSize="20px" decimals={5} value={pendingU} />
           </Flex>
+          <Button scale="sm" type="button" variant="secondary" style={{ fontSize: '14px' }} onClick={claim}>
+            {t('Claim')}
+          </Button>
         </Flex>
       </ActionContainer>
       <ActionContainer>
@@ -172,28 +157,6 @@ const HarvestAction = () => {
           title={t('Total Claimed %symbol%', { symbol: priceSymbol === SYMBOL.USDT ? 'USDT' : 'ERA' })}
           value={totalData ?? 0}
           unit={priceSymbol === SYMBOL.USDT ? 'USDT' : 'ERA'}
-          RenderTitleRight={
-            <StyledFlex>
-              <StyledDiv
-                onClick={() => {
-                  setPriceSymbol(SYMBOL.USDT)
-                  refreshHttp()
-                }}
-                active={priceSymbol === SYMBOL.USDT}
-              >
-                USDT
-              </StyledDiv>
-              <StyledDiv
-                onClick={() => {
-                  setPriceSymbol(SYMBOL.ERA)
-                  refreshHttp()
-                }}
-                active={priceSymbol === SYMBOL.ERA}
-              >
-                ERA
-              </StyledDiv>
-            </StyledFlex>
-          }
         />
       </ActionContainer>
     </Flex>

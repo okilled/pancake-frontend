@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
-import { useMatchBreakpoints } from '@pancakeswap/uikit'
+import { Flex, useMatchBreakpoints } from '@pancakeswap/uikit'
 
 import ActionPanel from './ActionPanel/ActionPanel'
 import APY from './Cells/APY'
@@ -36,11 +36,11 @@ const PoolRow: React.FC<PoolRowProps> = ({ account }) => {
     <>
       <StyledRow role="row">
         <NameCell />
-        <Profit account={account} />
-        {isLargerScreen && <APY account={account} />}
-        {isLargerScreen && <TotalPersonalStaking account={account} />}
-        {isLargerScreen && <IndividualProportion account={account} />}
-        {isLargerScreen && <TotalCommunityStaking account={account} />}
+        <Flex flex={1}>
+          {isLargerScreen && <TotalPersonalStaking account={account} />}
+          {isLargerScreen && <IndividualProportion account={account} />}
+          {isLargerScreen && <TotalCommunityStaking account={account} />}
+        </Flex>
       </StyledRow>
       <ActionPanel account={account} expanded={expanded} breakpoints={{ isXs, isSm, isMd, isLg, isXl, isXxl }} />
     </>

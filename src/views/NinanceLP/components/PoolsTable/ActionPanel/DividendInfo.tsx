@@ -13,23 +13,19 @@ import { ActionContainer, ActionTitles } from './styles'
 const DividendInfo = () => {
   const { t } = useTranslation()
   const { fastRefresh } = useRefresh()
-  const [eraValue, setEraValue] = useState(0)
   const [usdtValue, setUsdtValue] = useState(0)
 
-  const era = useERC20(tokens.era.address)
   const usdt = useERC20(tokens.usdt.address)
 
   useEffect(() => {
     const fetchReserve = async () => {
-      const eraBalance = await era.balanceOf(getNinanceFramAddress())
       const usdtBalance = await usdt.balanceOf(getNinanceFramAddress())
 
-      setEraValue(+formatBigNumberToFixed(eraBalance))
       setUsdtValue(+formatBigNumberToFixed(usdtBalance))
     }
 
     fetchReserve()
-  }, [era, usdt, fastRefresh])
+  }, [usdt, fastRefresh])
 
   return (
     <ActionContainer>
@@ -44,7 +40,6 @@ const DividendInfo = () => {
             </Flex>
           </ActionTitles>
           <Flex flexDirection="column" mt="12px">
-            <Balance lineHeight="1" color="primary" bold fontSize="18px" decimals={3} value={eraValue} unit="ERA" />
             <Balance
               lineHeight="1"
               color="primary"

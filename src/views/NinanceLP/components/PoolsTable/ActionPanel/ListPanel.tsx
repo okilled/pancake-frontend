@@ -84,7 +84,7 @@ const ListPanel: React.FunctionComponent<ListPanelProps> = ({
             <ListItem key={item.value}>
               <Flex justifyContent="space-between" alignItems="center">
                 <Text color="textSubtle" fontSize="14px">
-                  {item.value}
+                  {Number(item.value)?.toFixed(5)?.slice(0, -1)}
                   {unit}
                 </Text>
                 <Text color="textSubtle" fontSize="14px">

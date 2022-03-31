@@ -73,7 +73,7 @@ const StakeList = () => {
       const cur = Math.floor(new Date().getTime() / 1000)
       // const day = 86400
       const lock = 15 * 60 // 锁仓周期
-      const renew = lock + 5 * 60 // 续期周期
+      const renew = lock + 1 * 60 // 续期周期
       // const lock = day * 15 // 锁仓周期
       // const renew = lock + day // 续期周期
 
@@ -87,17 +87,19 @@ const StakeList = () => {
       const listData = await multicallv2(ninanceFarmAbi, calls)
 
       setList(
-        listData.map((item) => {
-          const lockTime = Number(item?.[2].toNumber() || '0')
-          const canRedeemable = (cur - lockTime) % renew > lock && (cur - lockTime) % renew < renew
-          return {
-            // isWithdraw true表示已赎回
-            amount: ethers.utils.formatEther(item?.[1]),
-            depositTime: dayjs.unix(item?.[2].toNumber()).format('YYYY-MM-DD'),
-            status: item?.[0] ? STATUS.withdraw : canRedeemable ? STATUS.redeemable : STATUS.staking,
-            countDown: canRedeemable ? renew - ((cur - lockTime) % renew) : lock - ((cur - lockTime) % renew),
-          }
-        }),
+        listData
+          .filter((item) => !item?.[0])
+          .map((item) => {
+            const lockTime = Number(item?.[2].toNumber() || '0')
+            const canRedeemable = (cur - lockTime) % renew > lock && (cur - lockTime) % renew < renew
+            return {
+              // isWithdraw true表示已赎回
+              amount: ethers.utils.formatEther(item?.[1]),
+              depositTime: dayjs.unix(item?.[2].toNumber()).format('YYYY-MM-DD'),
+              status: canRedeemable ? STATUS.redeemable : STATUS.staking,
+              countDown: canRedeemable ? renew - ((cur - lockTime) % renew) : lock - ((cur - lockTime) % renew),
+            }
+          }),
       )
       setLoading(false)
     }

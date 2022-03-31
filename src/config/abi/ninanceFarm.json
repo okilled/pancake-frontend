@@ -39,18 +39,8 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_ninance",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
 				"name": "_usdt",
 				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_ninancePerSecond",
-				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -122,31 +112,6 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "NinanceReward",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "pid",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
 				"name": "nonce",
 				"type": "uint256"
 			}
@@ -189,24 +154,6 @@
 			}
 		],
 		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "updateNinancePerSecond",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -408,45 +355,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "ninance",
-		"outputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ninanceEnd",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "ninancePerSecond",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -491,13 +399,8 @@
 				"type": "address"
 			}
 		],
-		"name": "pendingNINANCE",
+		"name": "pendingReward",
 		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
 			{
 				"internalType": "uint256",
 				"name": "",
@@ -530,11 +433,6 @@
 			{
 				"internalType": "uint256",
 				"name": "lastRewardTime",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "accNINANCEPerShare",
 				"type": "uint256"
 			},
 			{
@@ -642,11 +540,6 @@
 			{
 				"internalType": "uint256",
 				"name": "amount",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "rewardDebt",
 				"type": "uint256"
 			},
 			{

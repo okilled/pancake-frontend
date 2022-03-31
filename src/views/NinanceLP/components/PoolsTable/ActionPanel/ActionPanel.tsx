@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Box } from '@pancakeswap/uikit'
-import { useTranslation } from 'contexts/Localization'
 
 import APY from '../Cells/APY'
 import IndividualProportion from '../Cells/IndividualProportion'
@@ -59,21 +58,18 @@ const InfoSection = styled(Box)`
   padding: 8px 8px;
   ${({ theme }) => theme.mediaQueries.lg} {
     padding: 0;
-    flex-basis: 200px;
+    flex-basis: 230px;
   }
 `
 
 const ActionPanel: React.FC<ActionPanelProps> = ({ account, expanded, breakpoints }) => {
-  const { t } = useTranslation()
   const { isXs, isSm, isMd } = breakpoints
   return (
     <StyledActionPanel expanded={expanded}>
       <InfoSection>
         <DividendInfo />
-        {(isXs || isSm || isMd) && <APY account={account} />}
         {(isXs || isSm || isMd) && <TotalPersonalStaking account={account} />}
         {(isXs || isSm || isMd) && <IndividualProportion account={account} />}
-
         {(isXs || isSm || isMd) && <TotalCommunityStaking account={account} />}
       </InfoSection>
       <ActionContainer>

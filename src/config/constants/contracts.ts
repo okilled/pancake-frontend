@@ -101,6 +101,6 @@ export default {
   },
   ninanceFarm: {
     56: '',
-    97: '0x2afF25D1b515b4Db08937228E4C4663D439108f0',
+    97: '0x9066Fc3C602C99758A2f09a73BB043Af3b7Fb34c',
   },
 }

@@ -47,14 +47,14 @@ export const List = styled.div<{ visible: boolean }>`
 `
 
 export const ListItem = styled.div`
-  background-color: ${({ theme }) => theme.card.background};
-  padding: 6px 16px 6px 0;
+  background-color: ${({ theme }) => theme.colors.backgroundAlt3};
+  padding: 6px 16px;
   border-radius: 20px;
   margin-bottom: 8px;
 `
 
 export const StakeContent = styled.div`
-  background-color: ${({ theme }) => theme.card.background};
+  background-color: ${({ theme }) => theme.colors.backgroundAlt3};
   margin-top: 12px;
   border-radius: 10px;
   padding: 16px;
@@ -67,7 +67,7 @@ export const StakeListBox = styled.div`
 `
 
 export const StakeListItem = styled.div`
-  background-color: ${({ theme }) => theme.card.background};
+  background-color: ${({ theme }) => theme.colors.backgroundAlt3};
   margin-bottom: 8px;
   border-radius: 10px;
   padding: 6px 16px;
