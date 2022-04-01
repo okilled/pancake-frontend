@@ -22,7 +22,7 @@ export const mainnetTokens = {
     'https://www.ninance.io',
   ),
   era: new Token(MAINNET, '0x3f47D316b6Ca268C8a7916D6Ed02E90DbFEE3EE2', 18, 'ERA', 'ERA', 'https://www.ninance.io'),
-
+  div: new Token(MAINNET, '0xBf38A8b9cf02223b44f823e15f45219E9978b491', 18, 'DIV', 'DIV', 'https://www.ninance.io'),
   wbnb: new Token(
     MAINNET,
     '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
@@ -1909,7 +1909,8 @@ export const testnetTokens = {
     'USDT',
     'https://www.binance.com/',
   ),
-  era: new Token(TESTNET, '0xAe45bc23AB591BA756f0b7CddC050E7Dcc2f4bD8', 18, 'ERA', 'ERA', 'https://www.binance.com/'),
+  era: new Token(TESTNET, '0xAe45bc23AB591BA756f0b7CddC050E7Dcc2f4bD8', 18, 'ERA', 'ERA', 'https://www.ninance.com/'),
+  div: new Token(TESTNET, '0x7DD0dEB32f48fEe85085C7968b0d4A70A2E899aC', 18, 'DIV', 'DIV', 'https://www.ninance.io'),
   wbnb: new Token(
     TESTNET,
     // '0xae13d989dac2f0debff460ac112a837c89baa7cd',

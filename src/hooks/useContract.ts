@@ -34,6 +34,7 @@ import {
   getErc721CollectionContract,
   getNinanceFarmContract,
   getLpContract,
+  getNinanceSwapContract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress } from 'utils/addressHelpers'
 import { VaultKey } from 'state/types'
@@ -305,4 +306,9 @@ export const useNinanceFarmContract = () => {
 export const useNinanceLPContract = (address: string) => {
   const { library } = useActiveWeb3React()
   return useMemo(() => getLpContract(address, library.getSigner()), [address, library])
+}
+
+export const useNinanceSwapContract = () => {
+  const { library } = useActiveWeb3React()
+  return useMemo(() => getNinanceSwapContract(library.getSigner()), [library])
 }

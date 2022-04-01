@@ -148,6 +148,9 @@ export default function CurrencyList({
 
       const showImport = inactiveTokens && token && Object.keys(inactiveTokens).includes(token.address)
 
+      // 不显示DIV
+      if (currency.symbol === 'DIV') return null
+
       if (index === breakIndex || !data) {
         return (
           <FixedContentRow style={style}>

@@ -1,5 +1,5 @@
-import { ChainId } from '@pancakeswap/sdk'
 import addresses from 'config/constants/contracts'
+import { ChainId } from '@pancakeswap/sdk'
 import { Address } from 'config/constants/types'
 import { VaultKey } from 'state/types'
 
@@ -90,4 +90,7 @@ export const getPancakeSquadAddress = () => {
 }
 export const getNinanceFramAddress = () => {
   return getAddress(addresses.ninanceFarm)
+}
+export const getNinanceSwapAddress = () => {
+  return getAddress(addresses.ninanceSwap)
 }

@@ -1,37 +1,38 @@
-import React, { lazy } from 'react'
-import { Router, Redirect, Route, Switch } from 'react-router-dom'
-import { ResetCSS } from '@pancakeswap/uikit'
-import { useWeb3React } from '@web3-react/core'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
-import useUserAgent from 'hooks/useUserAgent'
 import useScrollOnRouteChange from 'hooks/useScrollOnRouteChange'
+import useUserAgent from 'hooks/useUserAgent'
+import React, { lazy } from 'react'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
+import { ResetCSS } from '@pancakeswap/uikit'
+import { useWeb3React } from '@web3-react/core'
 import { usePollBlockNumber } from 'state/block/hooks'
 import { usePollCoreFarmData } from 'state/farms/hooks'
 import { useFetchProfile } from 'state/profile/hooks'
 import { DatePickerPortal } from 'components/DatePicker'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
-import GlobalStyle from './style/Global'
-import Menu from './components/Menu'
-import SuspenseWithChunkError from './components/SuspenseWithChunkError'
-import { ToastListener } from './contexts/ToastsContext'
-import PageLoader from './components/Loader/PageLoader'
+
 import EasterEgg from './components/EasterEgg'
 import GlobalCheckClaimStatus from './components/GlobalCheckClaimStatus'
+import PageLoader from './components/Loader/PageLoader'
+import Menu from './components/Menu'
+import SuspenseWithChunkError from './components/SuspenseWithChunkError'
+import useSentryUser from './hooks/useSentryUser'
 import history from './routerHistory'
-// Views included in the main bundle
-// import Pools from './views/Pools'
+import GlobalStyle from './style/Global'
+import RedirectOldRemoveLiquidityPathStructure from './views/RemoveLiquidity/redirects'
 import Swap from './views/Swap'
+import { ToastListener } from './contexts/ToastsContext'
 import {
   RedirectDuplicateTokenIds,
   RedirectOldAddLiquidityPathStructure,
   RedirectToAddLiquidity,
 } from './views/AddLiquidity/redirects'
-import RedirectOldRemoveLiquidityPathStructure from './views/RemoveLiquidity/redirects'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './views/Swap/redirects'
 import { useInactiveListener } from './hooks/useInactiveListener'
-import useSentryUser from './hooks/useSentryUser'
 
+// Views included in the main bundle
+// import Pools from './views/Pools'
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
 const Home = lazy(() => import('./views/Home'))
@@ -57,6 +58,7 @@ const NftMarket = lazy(() => import('./views/Nft/market'))
 const ProfileCreation = lazy(() => import('./views/ProfileCreation'))
 const PancakeSquad = lazy(() => import('./views/PancakeSquad'))
 const NinanceLP = lazy(() => import('./views/NinanceLP'))
+const NinanceSwap = lazy(() => import('./views/NinanceSwap'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -151,6 +153,8 @@ const App: React.FC = () => {
 
             {/* Using this format because these components use routes injected props. We need to rework them with hooks */}
             <Route exact strict path="/swap" component={Swap} />
+            <Route exact strict path="/ninanceSwap" component={NinanceSwap} />
+
             <Route exact strict path="/swap/:outputCurrency" component={RedirectToSwap} />
             <Route exact strict path="/liquidity" component={Liquidity} />
             <Route exact path="/add" component={AddLiquidity} />

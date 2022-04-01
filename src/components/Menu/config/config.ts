@@ -1,4 +1,4 @@
-import { MenuItemsType, DropdownMenuItemType, menuStatus } from '@pancakeswap/uikit'
+import { DropdownMenuItemType, MenuItemsType, menuStatus } from '@pancakeswap/uikit'
 import { ContextApi } from 'contexts/Localization/types'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
 
@@ -22,6 +22,10 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
       {
         label: t('Farms'),
         href: '/NinanceLP',
+      },
+      {
+        label: t('Token Exchange'),
+        href: '/ninanceSwap',
       },
     ],
   },

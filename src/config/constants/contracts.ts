@@ -103,4 +103,8 @@ export default {
     56: '',
     97: '0x9066Fc3C602C99758A2f09a73BB043Af3b7Fb34c',
   },
+  ninanceSwap: {
+    56: '',
+    97: '0xdcf2B343703e6708bd41537a4E8921b432D2D7ec',
+  },
 }
