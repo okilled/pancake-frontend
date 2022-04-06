@@ -57,7 +57,7 @@ const Info = lazy(() => import('./views/Info'))
 const NftMarket = lazy(() => import('./views/Nft/market'))
 const ProfileCreation = lazy(() => import('./views/ProfileCreation'))
 const PancakeSquad = lazy(() => import('./views/PancakeSquad'))
-const NinanceLP = lazy(() => import('./views/NinanceLP'))
+// const NinanceLP = lazy(() => import('./views/NinanceLP'))
 const NinanceSwap = lazy(() => import('./views/NinanceSwap'))
 
 // This config is required for number formatting
@@ -133,9 +133,9 @@ const App: React.FC = () => {
               <Pools />
             </Route> */}
 
-            <Route path="/NinanceLP">
+            {/* <Route path="/NinanceLP">
               <NinanceLP />
-            </Route>
+            </Route> */}
 
             {/* NFT */}
             {/* <Route path="/nfts">

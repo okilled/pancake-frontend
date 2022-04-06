@@ -206,7 +206,8 @@ export default function Swap({ history }: RouteComponentProps) {
 
   useEffect(() => {
     setCheckHasApprove(false)
-  }, [account])
+    getHasApprove()
+  }, [account, getHasApprove])
 
   // modal and loading
   const [{ tradeToConfirm, swapErrorMessage, attemptingTxn, txHash }, setSwapState] = useState<{
