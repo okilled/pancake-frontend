@@ -15,6 +15,7 @@ import {
 import TransactionsModal from 'components/App/Transactions/TransactionsModal'
 import GlobalSettings from 'components/Menu/GlobalSettings'
 import { useExpertModeManager } from 'state/user/hooks'
+import { useTranslation } from 'contexts/Localization'
 
 interface Props {
   title: string
@@ -36,6 +37,8 @@ const ColoredIconButton = styled(IconButton)`
 `
 
 const CurrencyInputHeader: React.FC<Props> = ({ title, subtitle, setIsChartDisplayed, isChartDisplayed }) => {
+  const { t } = useTranslation()
+
   const [expertMode] = useExpertModeManager()
   const toggleChartDisplayed = () => {
     setIsChartDisplayed((currentIsChartDisplayed) => !currentIsChartDisplayed)
@@ -63,8 +66,15 @@ const CurrencyInputHeader: React.FC<Props> = ({ title, subtitle, setIsChartDispl
         </Flex>
 
         <Flex>
-          <Button variant="secondary" scale="sm">
-            交换DIV
+          <Button
+            variant="secondary"
+            scale="sm"
+            style={{ fontSize: '14px' }}
+            as="a"
+            href="https://pancakeswap.finance/swap?outputCurrency=0xBf38A8b9cf02223b44f823e15f45219E9978b491"
+            target="_blank"
+          >
+            {t('Exchange DIV')}
           </Button>
           {/* <NotificationDot show={expertMode}>
             <GlobalSettings color="textSubtle" mr="0" />

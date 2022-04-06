@@ -1766,5 +1766,6 @@
   "Redeem": "Redeem",
   "Redeemed": "Redeemed",
   "Automatic renewal after %dateTime%": "Automatic renewal after %dateTime%",
-  "Redeemable after %dateTime%": "Redeemable after %dateTime%"
+  "Redeemable after %dateTime%": "Redeemable after %dateTime%",
+  "Exchange DIV": "Exchange DIV"
 }

@@ -1766,5 +1766,6 @@
   "Redeem": "赎回",
   "Redeemed": "已赎回",
   "Automatic renewal after %dateTime%": "%dateTime% 后自动续期",
-  "Redeemable after %dateTime%": "%dateTime% 后可赎回"
+  "Redeemable after %dateTime%": "%dateTime% 后可赎回",
+  "Exchange DIV": "交换DIV"
 }
